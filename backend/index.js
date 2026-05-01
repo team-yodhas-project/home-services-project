@@ -15,9 +15,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 var connectDB=require('./db');
 connectDB();
 
-app.get('/',(req,res)=>{
-    res.send('hello World')
-})
+var authRouter=require('./routers/auth.router');
+app.use('/auth',authRouter)
 
 app.post('/auth/register',(req,res)=>{
     res.send(req.body)
