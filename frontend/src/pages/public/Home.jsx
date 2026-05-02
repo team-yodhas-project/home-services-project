@@ -8,6 +8,7 @@ import Footer from "../../components/Footer";
 const Home = () => {
   return (
     <>
+    <Navbar></Navbar>
     <section className="hero">
         <div className="container hero-content">
 

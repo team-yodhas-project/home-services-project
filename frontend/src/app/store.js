@@ -1,9 +1,8 @@
-// import {configureStore} from '@reduxjs/toolkit'
-// import { setupListeners } from "@reduxjs/toolkit/query";
-// export const store=configureStore({
-//     reducer:{
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "../features/auth/authSlice";
 
-//     },
-//     middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat()
-// })
-// setUpListeners(store.dispatch)
+export const store = configureStore({
+  reducer: {
+    auth: authReducer,
+  },
+});
