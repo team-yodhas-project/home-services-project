@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
   {
@@ -25,10 +25,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ['customer', 'provider', 'admin'],
       default: 'customer',
-    },
-    profilePic: {
-      type: String,
-      default: 'no-photo.jpg',
     },
     isVerified: {
       type: Boolean,
@@ -64,4 +60,4 @@ const userSchema = new mongoose.Schema(
 userSchema.index({ location: '2dsphere' });
 
 const User = mongoose.model('User', userSchema);
-export default User;
+module.exports = User;

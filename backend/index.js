@@ -16,11 +16,8 @@ var connectDB=require('./db');
 connectDB();
 
 var authRouter=require('./routers/auth.router');
-app.use('/auth',authRouter)
+app.use('/api/auth',authRouter)
 
-app.post('/auth/register',(req,res)=>{
-    res.send(req.body)
-})
 
 app.listen(5000,()=>{
     console.log("Server is running on port 5000");

@@ -1,7 +1,9 @@
+
+var bcrypt = require('bcryptjs');
 var User=require('../models/User.model');
-import bcrypt from 'bcryptjs';
-import generateToken  from '../utils/generateToken';
-import geocodeAddress from '../utils/geocodeAddress';
+var jwt=require('jsonwebtoken');
+var geocodeAddress=require('../utils/geocode');
+var generateToken=require('../utils/generateToken');
 
 var registerUser=async(req,res)=>{
    try{
@@ -39,7 +41,6 @@ var registerUser=async(req,res)=>{
         name: user.name,
         email: user.email,
         role: user.role,
-        profilePic: user.profilePic,
         isVerified: user.isVerified,
         token: generateToken(user._id),
       });
@@ -56,7 +57,49 @@ var registerUser=async(req,res)=>{
 }
 
 var loginUser=async(req,res)=>{
-    res.send(req.body);
+    try{
+      const {email,password}=req.body;
+      const user=await User.findOne({email}).select('+password');
+
+      if(user && (await bcrypt.compare(password,user.password)) ){
+        res.json({
+          _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        isVerified: user.isVerified,
+        token: generateToken(user._id)
+        })
+      }
+      else{
+        res.status(401).json({message:'Invalid email or password'});
+      }
+    }
+    catch(error){
+      res.status(500).json({message:error.message});
+    }
 }
 
-module.exports={registerUser,loginUser};
+const getUserProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        isVerified: user.isVerified,
+        skills: user.skills,
+        experience: user.experience,
+        location: user.location,
+      });
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }}
+
+module.exports={registerUser,loginUser,getUserProfile};
