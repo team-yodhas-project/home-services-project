@@ -51,9 +51,14 @@ const Navbar = () => {
         {/* RIGHT */}
         <div className="nav-right">
           {!user ? (
+            <>
             <button className="btn" onClick={() => navigate("/login")}>
               Login
             </button>
+            <button className="btn" onClick={() => navigate("/register")}>
+              Register
+            </button>
+            </>
           ) : (
             <>
               <button
