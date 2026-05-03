@@ -62,4 +62,19 @@ const isProvider=async(req,res,next)=>{
     }
 }
 
-module.exports={auth,isCustomer,isProvider,isAdmin};
+const isProviderOrAdmin=async(req,res,next)=>{
+    try{
+        const user=await User.findById(req.user.id);
+        if(user && (user.role==='provider' || user.role==='admin')){
+            next();
+        }
+        else{
+            return res.status(403).json({msg:"Access denied, must be provider or admin"});
+        }
+    }
+    catch(err){
+        res.status(500).json({msg:"Server error"});
+    }
+}
+
+module.exports={auth,isCustomer,isProvider,isAdmin,isProviderOrAdmin};

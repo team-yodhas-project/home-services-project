@@ -16,7 +16,11 @@ var connectDB=require('./db');
 connectDB();
 
 var authRouter=require('./routers/auth.router');
-app.use('/api/auth',authRouter)
+var serviceRouter=require('./routers/service.router');
+var userRouter=require('./routers/user.router');
+app.use('/api/auth',authRouter);
+app.use('/api/services',serviceRouter);
+app.use('/api/users',userRouter);
 
 
 app.listen(5000,()=>{

@@ -53,7 +53,7 @@ const initialState = {
   user: null,
   token: localStorage.getItem("token") || null,
   isAuthenticated: false,
-  loading: true, // 🔥 start as true (important)
+  loading: false, // 🔥 start as true (important)
   error: null,
 };
 
