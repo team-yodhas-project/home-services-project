@@ -36,6 +36,7 @@ const Home = () => {
         </div>
       </section>
 <br></br>
+
   <Services />
   <InfoSection></InfoSection>
   <Footer></Footer>

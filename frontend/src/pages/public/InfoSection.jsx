@@ -1,4 +1,3 @@
-// components/InfoSection.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,42 +7,67 @@ const InfoSection = () => {
   return (
     <section className="info-section">
       <div className="container">
-
-        {/* HOW IT WORKS */}
-        <div className="how-cards">
-
-          <div className="how-card">
-            <span>1</span>
-            <h4>Browse Services</h4>
-            <p>Explore categories and choose what you need</p>
-          </div>
-
-          <div className="how-card">
-            <span>2</span>
-            <h4>Select Service</h4>
-            <p>Pick the service that fits your requirement</p>
-          </div>
-
-          <div className="how-card">
-            <span>3</span>
-            <h4>Book & Relax</h4>
-            <p>Schedule and get it done at your fingertips</p>
-          </div>
-
+    
+        {/* SECTION HEADER */}
+        <div className="info-header">
+          <h2>Your Skills. Your Needs. One Platform.</h2>
+          <p>
+            Whether you're looking to get things done or earn from your skills,
+            Skill Link makes it simple, fast, and reliable.
+          </p>
         </div>
 
-        <div className="worker-card">
-          <div>
-            <h2>Earn with your skills</h2>
-            <p>Join Skill Link and connect with customers near you</p>
+        <div className="info-grid">
+
+          {/* PLATFORM VALUE */}
+          <div className="info-box">
+            <h3>Connecting People Seamlessly</h3>
+            <p>
+              No middlemen, no confusion. Skill Link directly connects customers 
+              with skilled professionals in their area — making services faster, 
+              more transparent, and more reliable.
+            </p>
           </div>
 
-          <button
-            className="btn"
-            onClick={() => navigate("/register-worker")}
-          >
-            Register as Worker
-          </button>
+          {/* CUSTOMER */}
+          <div className="info-box">
+            <h3>For Customers</h3>
+            <p className="sub-text">
+              Get your work done without the hassle.
+            </p>
+            <ul>
+              <li>Discover trusted professionals near you</li>
+              <li>Compare services and choose confidently</li>
+              <li>Book instantly, anytime</li>
+            </ul>
+            <button
+              className="btn"
+              onClick={() => navigate("/register")}
+            >
+              Explore Service at fingertips
+            </button>
+          </div>
+
+          {/* WORKER */}
+          <div className="info-box worker-highlight">
+            <h3>For Workers</h3>
+            <p className="sub-text">
+              Turn your skills into steady income.
+            </p>
+            <ul>
+              <li>Create a professional profile in minutes</li>
+              <li>Showcase your expertise and get noticed</li>
+              <li>Connect with real customers and grow</li>
+            </ul>
+
+            <button
+              className="btn"
+              onClick={() => navigate("/register", { state: { role: "provider" } })}
+            >
+              Start Earning Now
+            </button>
+          </div>
+
         </div>
 
       </div>
@@ -52,3 +76,7 @@ const InfoSection = () => {
 };
 
 export default InfoSection;
+
+
+
+

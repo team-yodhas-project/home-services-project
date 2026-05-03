@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    if (token) {
+    if (token  && window.location.pathname !== "/login"  && window.location.pathname !="/register") {
       dispatch(getProfile());
     }
   }, []);
