@@ -20,7 +20,7 @@ var serviceRouter=require('./routers/service.router');
 var userRouter=require('./routers/user.router');
 app.use('/api/auth',authRouter);
 app.use('/api/services',serviceRouter);
-app.use('/api/users',userRouter);
+app.use('/api/admin',userRouter);
 
 
 app.listen(5000,()=>{
