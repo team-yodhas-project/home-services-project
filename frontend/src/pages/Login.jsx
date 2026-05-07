@@ -3,14 +3,25 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState,useRef, useEffect } from "react";
 
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.auth);
+  useEffect(()=>{
+    ref1.current.focus();
+  }, [])
 
+  const ref1=useRef();
+  const ref2=useRef();
+
+  function handleChange(ev){
+    if(ev.key=="Enter"){
+      ref2.current.focus();
+    }
+  }
   const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik({
@@ -43,6 +54,7 @@ function Login() {
               onChange={formik.handleChange}
               value={formik.values.email}
               placeholder="Enter your email"
+              ref={ref1}
             />
           </div>
 
@@ -54,6 +66,8 @@ function Login() {
               onChange={formik.handleChange}
               value={formik.values.password}
               placeholder="Enter your password"
+              ref={ref2}
+              onKeyUp={(ev)=>{handleChange(ev)}}
             />
             <span
               className="password-toggle"

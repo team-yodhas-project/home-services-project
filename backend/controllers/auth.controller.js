@@ -7,22 +7,27 @@ var generateToken=require('../utils/generateToken');
 
 var registerUser=async(req,res)=>{
    try{
-    const {name,email,password,role,skills,experience,address}=req.body;
+    const {name,email,password,role,phone,skills,experience,address}=req.body;
     const userExists=await User.findOne({email});
 
     if(userExists){
-        return res.status(400).json({message:'User already exista'});
+        return res.status(400).json({message:'User already exists'});
     }
     
     const salt=await bcrypt.genSalt(10);
     const hashedPassword=await bcrypt.hash(password,salt);
 
     let locationData=null;
-    if(role==='provider' && address){
+    if( address){
         const geoData=await geocodeAddress(address);
         if(geoData){
             locationData= geoData;
         }
+    }
+
+    let documentPaths=[];
+    if(role==="provider" && req.files){
+      documentPaths=req.files.map(file=>file.path); 
     }
    
     const user = await User.create({
@@ -30,9 +35,11 @@ var registerUser=async(req,res)=>{
       email,
       password: hashedPassword,
       role: role || 'customer',
+      phone: phone || '',
       skills: skills || [],
       experience: experience || 0,
       location: locationData,
+      documents: documentPaths,
     });
 
     if (user) {
@@ -41,6 +48,7 @@ var registerUser=async(req,res)=>{
         name: user.name,
         email: user.email,
         role: user.role,
+        phone:user.phone,
         isVerified: user.isVerified,
         token: generateToken(user._id),
       });
@@ -67,6 +75,7 @@ var loginUser=async(req,res)=>{
         name: user.name,
         email: user.email,
         role: user.role,
+        phone:user.phone,
         isVerified: user.isVerified,
         token: generateToken(user._id)
         })
@@ -90,10 +99,13 @@ const getUserProfile = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        phone: user.phone,
         isVerified: user.isVerified,
         skills: user.skills,
         experience: user.experience,
         location: user.location,
+        documents: user.documents,
+        
       });
     } else {
       res.status(404).json({ message: 'User not found' });

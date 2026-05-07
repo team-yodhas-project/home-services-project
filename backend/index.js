@@ -1,6 +1,10 @@
 var express=require('express');
 var app=express();
 
+var path=require('path');
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'public')));
+
 var dotenv=require('dotenv');
 dotenv.config();
 
@@ -22,6 +26,10 @@ app.use('/api/auth',authRouter);
 app.use('/api/services',serviceRouter);
 app.use('/api/admin',userRouter);
 
+
+app.get('/',(req,res)=>{
+    res.send("Welcome to Home Services API");
+});
 
 app.listen(5000,()=>{
     console.log("Server is running on port 5000");

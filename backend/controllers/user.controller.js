@@ -31,46 +31,46 @@ const getUsers=async(req,res)=>{
 }
 
 
-// @desc    Verify provider
-// @route   PUT /api/users/:id/verify
-// @access  Private/Admin
+// // @desc    Verify provider
+// // @route   PUT /api/users/:id/verify
+// // @access  Private/Admin
 
-const verifyProvider=async(req,res)=>{
-    try{
-        const user=await User.findById(req.params.id);
+// const verifyProvider=async(req,res)=>{
+//     try{
+//         const user=await User.findById(req.params.id);
         
-        if (user && user.role === 'provider') {
-      user.isVerified = true;
-      const updatedUser = await user.save();
-      res.json(updatedUser);
-    } else {
-      res.status(404).json({ message: 'Provider not found or not a provider' });
-    }
+//         if (user && user.role === 'provider') {
+//       user.isVerified = true;
+//       const updatedUser = await user.save();
+//       res.json(updatedUser);
+//     } else {
+//       res.status(404).json({ message: 'Provider not found or not a provider' });
+//     }
     
-    }
-    catch (error) {
-    res.status(500).json({ message: error.message });
-    }
-}
+//     }
+//     catch (error) {
+//     res.status(500).json({ message: error.message });
+//     }
+// }
 
-// @desc    Delete user
-// @route   DELETE /api/users/:id
-// @access  Private/Admin
+// // @desc    Delete user
+// // @route   DELETE /api/users/:id
+// // @access  Private/Admin
 
-const deleteUser = async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
+// const deleteUser = async (req, res) => {
+//   try {
+//     const user = await User.findById(req.params.id);
 
-    if (user) {
-      await user.deleteOne();
-      res.json({ message: 'User removed' });
-    } else {
-      res.status(404).json({ message: 'User not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+//     if (user) {
+//       await user.deleteOne();
+//       res.json({ message: 'User removed' });
+//     } else {
+//       res.status(404).json({ message: 'User not found' });
+//     }
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
 
 
@@ -87,25 +87,25 @@ const getServices=async(req,res)=>{
   }
 } 
 
-// @desc    Delete service
-// @route   DELETE /api/users/admin/services/:id
-// @access  Private/Admin
+// // @desc    Delete service
+// // @route   DELETE /api/users/admin/services/:id
+// // @access  Private/Admin
 
-const deleteService=async(req,res)=>{
-  try{
-      const service=await Service.findById(req.params.id);
-      if(service){
-        await service.deleteOne();
-        res.json({message:'Service removed'})
-      }
-      else{
-        res.status(404).json({message:'Service not found'})
-      }
-  }
-  catch(err){
-    res.status(500).json({message:err.message})
-  }
-}
+// const deleteService=async(req,res)=>{
+//   try{
+//       const service=await Service.findById(req.params.id);
+//       if(service){
+//         await service.deleteOne();
+//         res.json({message:'Service removed'})
+//       }
+//       else{
+//         res.status(404).json({message:'Service not found'})
+//       }
+//   }
+//   catch(err){
+//     res.status(500).json({message:err.message})
+//   }
+// }
 
 // @desc    Get all providers
 // @route   GET /api/users/admin/providers
@@ -123,4 +123,4 @@ const getProviders = async (req, res) => {
 
 
 
-module.exports={getStats,getUsers,verifyProvider,deleteUser,getServices,deleteService,getProviders}
+module.exports={getStats,getUsers,getServices,getProviders}
