@@ -48,6 +48,7 @@ function Register() {
         email: values.email.trim(),
         password: values.password,
         phone: values.phone.trim(),
+        address:values.address||"",
         role,
 
         skills:
@@ -61,8 +62,7 @@ function Register() {
         experience:
           role === "provider" ? Number(values.experience) : 0,
 
-        address:
-          role === "provider" ? values.address : "",
+        
       };
 
       try {
@@ -180,6 +180,23 @@ function Register() {
             )}
           </div>
 
+          {/* ADDRESS */}
+              <div className="input-group">
+                <label>City / Location</label>
+                <input
+                  name="address"
+                  placeholder="Enter your location"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.address}
+                />
+                {showError("address") && (
+                  <small className="error">
+                    {formik.errors.address}
+                  </small>
+                )}
+              </div>
+
           {/* PROVIDER ONLY */}
           {role === "provider" && (
             <>
@@ -219,22 +236,7 @@ function Register() {
                 )}
               </div>
 
-              {/* ADDRESS */}
-              <div className="input-group">
-                <label>City / Location</label>
-                <input
-                  name="address"
-                  placeholder="Enter your location"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.address}
-                />
-                {showError("address") && (
-                  <small className="error">
-                    {formik.errors.address}
-                  </small>
-                )}
-              </div>
+              
             </>
           )}
 

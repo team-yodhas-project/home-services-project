@@ -5,7 +5,6 @@ import App from './App.jsx'
 import {Provider} from 'react-redux'
 import { createBrowserRouter,RouterProvider} from 'react-router-dom'
 import AddService from './pages/WorkerDashboard/AddService.jsx'
-import MyServices from './pages/WorkerDashboard/MyServices.jsx'
 import Bookings from './pages/WorkerDashboard/Bookings.jsx'
 
 import { store } from './app/store.js'
@@ -58,10 +57,6 @@ const  router=createBrowserRouter([
           {
             path: 'addservice',
             element: <AddService />
-          },
-          {
-            path: 'services',
-            element: <MyServices />
           },
           {
             path: 'bookings',
