@@ -1,0 +1,39 @@
+.dashboard-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 220px;
+  background: #f4f6f8;
+  padding: 20px;
+  height: 100vh;
+}
+
+.sidebar a {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.stats {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 200px;
+}
+
+.service-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-top: 10px;
+}

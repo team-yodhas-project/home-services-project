@@ -1,17 +1,3 @@
-// import React from 'react'
-// import { Link } from 'react-router-dom';
-
-// function Navbar(){
-//     return (
-//         <div>
-//             <h1>NavBar</h1>
-//             <button className='bg-blue-500 text-white px-4 py-2 rounded'>Login</button>
-//            <Link to="/register"> <button className='bg-green-500 text-white px-4 py-2 rounded'>Register</button></Link>
-//         </div>
-//     )
-// }
-// export default Navbar
-
 
 // components/Navbar.jsx
 import React, { useEffect, useState } from "react";
@@ -38,17 +24,17 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="container nav-content">
 
-        {/* LEFT */}
+        
         <div className="nav-left" onClick={() => navigate("/")}>
           <img
-            src="../public/logo.png" // put your logo in public folder
+            src="../public/logo.png" 
             alt="logo"
             className="logo"
           />
           <h2>Skill Link</h2>
         </div>
 
-        {/* RIGHT */}
+        
         <div className="nav-right">
           {!user ? (
             <>

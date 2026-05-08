@@ -66,7 +66,6 @@ function Register() {
 
         <form onSubmit={formik.handleSubmit}>
 
-          {/* 🔥 Role Selection */}
           <div className="role-select">
             <label>
               <input
@@ -121,7 +120,7 @@ function Register() {
             />
           </div>
 
-          {/* 🔥 Provider Fields */}
+          
           {role === "provider" && (
             <>
               <div className="input-group">
@@ -157,7 +156,7 @@ function Register() {
             </>
           )}
 
-          {/* Error */}
+     
           {error && <p className="error">{error}</p>}
 
           {/* Button */}

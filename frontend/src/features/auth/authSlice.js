@@ -5,7 +5,7 @@ import {
   getProfileAPI,
 } from "./authAPI";
 
-// 🔥 Async Thunks
+
 
 export const registerUser = createAsyncThunk(
   "auth/register",
@@ -47,17 +47,15 @@ export const getProfile = createAsyncThunk(
   }
 );
 
-// 🧱 Initial State (FIXED)
 
 const initialState = {
   user: null,
   token: localStorage.getItem("token") || null,
   isAuthenticated: false,
-  loading: false, // 🔥 start as true (important)
+  loading: false,
   error: null,
 };
 
-// 🧩 Slice
 
 const authSlice = createSlice({
   name: "auth",
@@ -74,7 +72,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-      // ================= REGISTER =================
+      // register 
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -92,7 +90,7 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
 
-      // ================= LOGIN =================
+      // login
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -110,19 +108,19 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
 
-      // ================= PROFILE (FIXED PART) =================
+      // profile
       .addCase(getProfile.pending, (state) => {
-        state.loading = true; // 🔥 this was missing
+        state.loading = true; 
       })
       .addCase(getProfile.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuthenticated = true;
-        state.loading = false; // 🔥 critical
+        state.loading = false; 
       })
       .addCase(getProfile.rejected, (state) => {
         state.user = null;
         state.isAuthenticated = false;
-        state.loading = false; // 🔥 critical
+        state.loading = false; 
       });
   },
 });
