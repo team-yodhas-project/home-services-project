@@ -129,6 +129,7 @@
 
 .password-input-wrapper {
   position: relative;
+  
 }
 
 .password-input-wrapper input {
@@ -138,7 +139,7 @@
 .password-toggle-inside {
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 60%;
   transform: translateY(-50%);
   font-size: 12px;
   color: #555;

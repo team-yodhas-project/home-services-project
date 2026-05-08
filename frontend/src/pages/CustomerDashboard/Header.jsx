@@ -13,7 +13,7 @@ const Header = ({ user }) => {
 
       <div className="user-info">
         🔔
-        <span>{user?.name}</span>
+        <span>{user}</span>
       </div>
     </div>
   );

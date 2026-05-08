@@ -15,8 +15,7 @@ export const authApi = createApi({
 
       if (token) {
         headers.set(
-          "authorization",
-          `Bearer ${token}`
+          "x-auth-token",token
         );
       }
 
@@ -37,15 +36,15 @@ export const authApi = createApi({
 
     }),
 
-    // LOGIN
-    loginUser: builder.mutation({
+    
 
-      query: (data) => ({
+    loginUser: builder.mutation({
+      query: (formData) => ({
         url: "/auth/login",
         method: "POST",
-        body: data,
+        body: formData,
       }),
-
+      transformResponse: (response) => response,
     }),
 
     // PROFILE

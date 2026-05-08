@@ -1,4 +1,4 @@
-
+//there are changes not completed
 // components/Navbar.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ const Navbar = () => {
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      setUser(storedUser);
     }
   }, []);
 
@@ -70,3 +70,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

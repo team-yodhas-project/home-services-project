@@ -9,9 +9,12 @@ export const authApi = createApi({
 
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
+    
 
       if (token) {
-        headers.set("authorization", `Bearer ${token}`);
+        headers.set(
+          "x-auth-token",token
+        );
       }
 
       return headers;
@@ -27,6 +30,7 @@ export const authApi = createApi({
         method: "POST",
         body: formData,
       }),
+      
     }),
 
     // LOGIN

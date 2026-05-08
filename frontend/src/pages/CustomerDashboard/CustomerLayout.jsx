@@ -7,7 +7,9 @@ import BookingPanel from "./BookingPanel";
 import "./customerdashboard.css";
 
 const CustomerLayout = () => {
-  const { user } = useSelector((state) => state.auth);
+ const user = localStorage.getItem("user");
+
+
 
   return (
     <div className="dashboard">

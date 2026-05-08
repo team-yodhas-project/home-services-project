@@ -1,12 +1,4 @@
-// import { useSelector } from "react-redux";
 
-// const WorkerLayout = () => {
-//   const { user } = useSelector((state) => state.auth);
-
-//   return <h2>Worker_Dashboard - {user?.name}</h2>;
-// };
-
-// export default WorkerLayout;
 
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";

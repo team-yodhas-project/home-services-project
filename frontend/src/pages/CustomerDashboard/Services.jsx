@@ -13,7 +13,7 @@ const ServicesSection = () => {
       <div className="service-grid">
         {services.map((s, i) => (
           <div className="card" key={i}>
-            <img src="https://via.placeholder.com/150" alt="" />
+           
             <h4>{s.title}</h4>
             <p>Starting at ₹{s.price}</p>
             <button>Book Now</button>
