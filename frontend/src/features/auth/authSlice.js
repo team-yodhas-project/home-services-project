@@ -1,129 +1,53 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  registerUserAPI,
-  loginUserAPI,
-  getProfileAPI,
-} from "./authAPI";
 
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+export const authApi = createApi({
+  reducerPath: "authApi",
 
-export const registerUser = createAsyncThunk(
-  "auth/register",
-  async (formData, thunkAPI) => {
-    try {
-      const res = await registerUserAPI(formData);
-      return res.data;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(
-        err.response?.data?.message || err.response?.data?.msg
-      );
-    }
-  }
-);
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:5000/api",
 
-export const loginUser = createAsyncThunk(
-  "auth/login",
-  async (formData, thunkAPI) => {
-    try {
-      const res = await loginUserAPI(formData);
-      return res.data;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(
-        err.response?.data?.message || err.response?.data?.msg
-      );
-    }
-  }
-);
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
 
-export const getProfile = createAsyncThunk(
-  "auth/profile",
-  async (_, thunkAPI) => {
-    try {
-      const res = await getProfileAPI();
-      return res.data;
-    } catch (err) {
-      return thunkAPI.rejectWithValue("Not authorized");
-    }
-  }
-);
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
 
-
-const initialState = {
-  user: null,
-  token: localStorage.getItem("token") || null,
-  isAuthenticated: false,
-  loading: false,
-  error: null,
-};
-
-
-const authSlice = createSlice({
-  name: "auth",
-  initialState,
-  reducers: {
-    logout: (state) => {
-      state.user = null;
-      state.token = null;
-      state.isAuthenticated = false;
-      state.loading = false;
-      localStorage.removeItem("token");
+      return headers;
     },
-  },
-  extraReducers: (builder) => {
-    builder
+  }),
 
-      // register 
-      .addCase(registerUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload;
-        state.token = action.payload.token;
-        state.isAuthenticated = true;
+  endpoints: (builder) => ({
 
-        localStorage.setItem("token", action.payload.token);
-      })
-      .addCase(registerUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
+    // REGISTER
+    registerUser: builder.mutation({
+      query: (formData) => ({
+        url: "/auth/register",
+        method: "POST",
+        body: formData,
+      }),
+    }),
 
-      // login
-      .addCase(loginUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload;
-        state.token = action.payload.token;
-        state.isAuthenticated = true;
+    // LOGIN
+    loginUser: builder.mutation({
+      query: (formData) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: formData,
+      }),
+    }),
 
-        localStorage.setItem("token", action.payload.token);
-      })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
+    // PROFILE
+    getProfile: builder.query({
+      query: () => "/auth/profile",
+    }),
 
-      // profile
-      .addCase(getProfile.pending, (state) => {
-        state.loading = true; 
-      })
-      .addCase(getProfile.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isAuthenticated = true;
-        state.loading = false; 
-      })
-      .addCase(getProfile.rejected, (state) => {
-        state.user = null;
-        state.isAuthenticated = false;
-        state.loading = false; 
-      });
-  },
+  }),
 });
 
-export const { logout } = authSlice.actions;
-export default authSlice.reducer;
+export const {
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useGetProfileQuery,
+} = authApi;
