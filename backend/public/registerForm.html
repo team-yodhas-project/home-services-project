@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Services Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #f4f6fb;
+      color: #222;
+    }
+    h1,
+    h2 {
+      color: #2a3f66;
+    }
+    .container {
+      max-width: 760px;
+      margin: auto;
+      background: #ffffff;
+      padding: 1.8rem;
+      border-radius: 12px;
+      box-shadow: 0 12px 28px rgba(15, 33, 76, 0.08);
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-weight: 600;
+    }
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.85rem 0.95rem;
+      border: 1px solid #d1d8e4;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    button {
+      background: #2f6df5;
+      color: #fff;
+      border: none;
+      padding: 0.95rem 1.4rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background: #254fc3;
+    }
+    .note {
+      font-size: 0.95rem;
+      color: #555;
+      margin-top: -0.5rem;
+    }
+    .divider {
+      margin: 2rem 0;
+      border-top: 1px solid #e3e8f3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Home Services Portal</h1>
+    <p class="note">Use this page to create a new user account or login to the backend auth API.</p>
+
+    <section>
+      <h2>Register</h2>
+      <form action="http://localhost:5000/api/auth/register" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter a secure password" required />
+        </div>
+
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select id="role" name="role" required>
+            <option value="customer">Customer</option>
+            <option value="provider">Provider</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter phone number" />
+        </div>
+
+        <div class="form-group">
+          <label for="skills">Skills</label>
+          <input type="text" id="skills" name="skills" placeholder="Comma-separated skills (provider only)" />
+          <p class="note">Example: plumbing, electrical, carpentry</p>
+        </div>
+
+        <div class="form-group">
+          <label for="experience">Experience (years)</label>
+          <input type="number" id="experience" name="experience" min="0" step="1" placeholder="0" />
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <textarea id="address" name="address" placeholder="Enter your address for geocoding"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="documents">Documents</label>
+          <input type="file" id="documents" name="documents" multiple />
+          <p class="note">Upload provider documents. Up to 3 files are accepted by the backend.</p>
+        </div>
+
+        <button type="submit">Register</button>
+      </form>
+    </section>
+
+    <div class="divider"></div>
+
+    </section>
+  </div>
+</body>
+</html>

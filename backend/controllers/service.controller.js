@@ -30,7 +30,7 @@ const getServices=async(req,res)=>{
    const services = await Service.find(query).populate('providerId', 'name profilePic experience isVerified');
 
     // Only return verified provider services
-    const verifiedServices = services.filter(service => service.providerId && service.providerId.isVerified);
+    const verifiedServices = services.filter(service => service.providerId && service.isActive);
 
     res.json(verifiedServices);
   } catch (err) {
@@ -59,9 +59,9 @@ const getServices=async(req,res)=>{
   try {
     const { title, description, category, price } = req.body;
 
-    if (!req.user.isVerified) {
-      return res.status(403).json({ message: 'You must be verified to create a service' });
-    }
+    // if (!req.user.isVerified) {
+    //   return res.status(403).json({ message: 'You must be verified to create a service' });
+    // }
 
     const service = new Service({
       title,
@@ -90,7 +90,7 @@ const getServices=async(req,res)=>{
 
     if (service) {
       // Check if user owns service
-      if (service.providerId.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
+      if (service.providerId.toString() !== req.user._id.toString()) {
         return res.status(401).json({ message: 'User not authorized to update this service' });
       }
 
@@ -112,13 +112,13 @@ const getServices=async(req,res)=>{
 
 // @desc    Delete service
 // @route   DELETE /api/services/:id
-// @access  Private/Provider/Admin
+// @access  Private/Provider
 const deleteService = async (req, res) => {
   try {
     const service = await Service.findById(req.params.id);
 
     if (service) {
-      if (service.providerId.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
+      if (service.providerId.toString() !== req.user._id.toString()) {
         return res.status(401).json({ message: 'User not authorized' });
       }
 
@@ -131,4 +131,23 @@ const deleteService = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-module.exports={getServices,getServiceById,createService,updateService,deleteService};
+
+const disableService=async(req,res)=>{
+  try{
+    const service =await Service.findById(req.params.id);
+    if(service){
+      if(service.providerId.toString()!==req.user._id.toString()){
+        return res.status(401).json({message:'User not authorized'});
+      } 
+      service.isActive=false;
+      res.json({message:"service Disabled"});
+    }
+    else{
+      res.status(404).json({message:'Service not found'});
+    }
+  }
+  catch(err){
+    res.status(500).json({message:err.message});
+  }
+}
+module.exports={getServices,getServiceById,createService,updateService,deleteService,disableService};

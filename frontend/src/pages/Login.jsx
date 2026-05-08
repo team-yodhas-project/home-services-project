@@ -1,37 +1,42 @@
 import "../styles/auth.css";
+import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState,useRef, useEffect } from "react";
+
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.auth);
+  useEffect(()=>{
+    ref1.current.focus();
+  }, [])
 
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+  const ref1=useRef();
+  const ref2=useRef();
 
+  function handleChange(ev){
+    if(ev.key=="Enter"){
+      ref2.current.focus();
+    }
+  }
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const formik = useFormik({
+    initialValues: { email: "", password: "" },
+    onSubmit: async (values) => {
+      const res = await dispatch(loginUser(values));
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+      if (res.meta.requestStatus === "fulfilled") {
+        const role = res.payload.role;
 
-    const res = await dispatch(loginUser(form));
-
-    if (res.meta.requestStatus === "fulfilled") {
-      const role = res.payload.role?.toLowerCase();
-
-      if (role === "customer") navigate("/customerdashboard");
-      else navigate("/workerdashboard");
-    }
-  };
+        if (role === "customer") navigate("/customerdashboard");
+        else navigate("/workerdashboard");
+      }
+    },
+  });
 
   return (
     <div className="auth-wrapper">
@@ -40,39 +45,36 @@ function Login() {
         <h2 className="auth-title">Welcome Back!</h2>
         <p className="auth-subtitle">Login to your account</p>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
 
-          {/* EMAIL */}
           <div className="input-group">
             <label>Email</label>
             <input
               name="email"
-              value={form.email}
-              onChange={handleChange}
+              onChange={formik.handleChange}
+              value={formik.values.email}
               placeholder="Enter your email"
+              ref={ref1}
             />
           </div>
 
-          {/* PASSWORD */}
           <div className="input-group password-box">
             <label>Password</label>
-
-            <div className="password-input-wrapper">
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                placeholder="Enter your password"
-              />
-
-              <span
-                className="password-toggle-inside"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? "Hide" : "Show"}
-              </span>
-            </div>
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              placeholder="Enter your password"
+              ref={ref2}
+              onKeyUp={(ev)=>{handleChange(ev)}}
+            />
+            <span
+              className="password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </span>
           </div>
 
           {error && <p className="error">{error}</p>}
@@ -84,8 +86,7 @@ function Login() {
         </form>
 
         <div className="auth-footer">
-          Don’t have an account?{" "}
-          <span onClick={() => navigate("/register")}>Register</span>
+          Don’t have an account? <span onClick={() => navigate("/register")}>Register</span>
         </div>
 
       </div>
@@ -94,5 +95,3 @@ function Login() {
 }
 
 export default Login;
-
-

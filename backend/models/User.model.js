@@ -26,19 +26,7 @@ const userSchema = new mongoose.Schema(
       enum: ['customer', 'provider', 'admin'],
       default: 'customer',
     },
-    isVerified: {
-      type: Boolean,
-      default: function () {
-        return this.role === 'customer' || this.role === 'admin';
-      },
-    },
-    // Provider specific fields
-    skills: {
-      type: [String],
-    },
-    experience: {
-      type: Number, // Years of experience
-    },
+    phone:String,
     location: {
       type: {
         type: String,
@@ -50,6 +38,25 @@ const userSchema = new mongoose.Schema(
       },
       address: String,
     },
+    // Provider specific fields
+    skills: {
+      type: [String],
+    },
+    experience: {
+      type: Number, // Years of experience
+    },
+    documents:[String],
+  //   isVerified: {
+  //     type: Boolean,
+  //     default: function () {
+  //       return this.role === 'customer' || this.role === 'admin';
+  //     },
+  //   },
+  //   verificationStatus: {
+  //   type: String,
+  //   enum: ["pending", "approved", "rejected"],
+  //   default: "pending",
+  // },
   },
   {
     timestamps: true,
