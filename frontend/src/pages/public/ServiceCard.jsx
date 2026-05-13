@@ -5,15 +5,15 @@ const ServiceCard = ({ title, image }) => {
   return (
     <div style={{
       background: "#fff",
-      padding: "20px",
+      // padding: "30px",
       borderRadius: "10px",
       
       textAlign: "center",
       boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
     }}>
-      <img src={image} alt={title} style={{ width: "60px", marginBottom: "10px" }} />
+      <img src={image} alt={title} style={{ marginBottom: "10px" }} />
       <h4>{title}</h4>
-      <button style={{ marginTop: "10px" }} className="btn">Book Now</button>
+      {/* <button style={{ marginTop: "10px" }} className="btn">Book Now</button> */}
     </div>
   );
 };

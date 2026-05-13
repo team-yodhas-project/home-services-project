@@ -1,0 +1,122 @@
+.dashboard {
+  display: flex;
+  font-family: Arial, sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #f8f9fb;
+  padding: 20px;
+  height: 100vh;
+}
+
+.logo {
+  margin-bottom: 30px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.sidebar .active {
+  background: #e3e7ff;
+  border-radius: 8px;
+}
+
+/* Main */
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.search-bar input {
+  padding: 5px;
+}
+
+.search-bar button {
+  background: #3b5bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+}
+
+/* Content */
+.content-area {
+  display: flex;
+  gap: 20px;
+}
+
+/* Services */
+.services {
+  flex: 2;
+}
+
+.service-grid {
+  display: flex;
+  gap: 15px;
+}
+
+.card {
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  width: 150px;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.card button {
+  margin-top: 10px;
+  background: #3b5bff;
+  color: white;
+  border: none;
+  padding: 5px;
+  width: 100%;
+}
+
+/* Booking Panel */
+.booking-panel {
+  flex: 1;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.booking-panel input,
+.booking-panel select,
+.booking-panel textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.confirm-btn {
+  background: #3b5bff;
+  color: white;
+  padding: 8px;
+  border: none;
+  width: 100%;
+}

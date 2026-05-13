@@ -177,14 +177,11 @@ body {
   padding-left: 0px;
   padding-right: 0px;
   padding-bottom: 10px;
-  width:150px;
-  height:200px;
-  border-radius: 12px;
-  text-align: center;
-  cursor: pointer;
-  width:100px;
+   text-align: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   transition: transform 0.2s ease;
+  border-radius: 12px;
+
 }
 
 .service-card:hover {
@@ -192,6 +189,8 @@ body {
 }
 
 .service-card img {
+  padding:0px;
+
   width: 200px;
   height:150px;
   margin-bottom: 10px;

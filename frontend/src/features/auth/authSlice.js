@@ -1,75 +1,23 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  registerUserAPI,
-  loginUserAPI,
-  getProfileAPI,
-} from "./authAPI";
 
-// 🔥 Async Thunks
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const registerUser = createAsyncThunk(
-  "auth/register",
-  async (formData, thunkAPI) => {
-    try {
-      const res = await registerUserAPI(formData);
-      return res.data;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(
-        err.response?.data?.message || err.response?.data?.msg
-      );
-    }
-  }
-);
+export const authApi = createApi({
+  reducerPath: "authApi",
 
-export const loginUser = createAsyncThunk(
-  "auth/login",
-  async (formData, thunkAPI) => {
-    try {
-      const res = await loginUserAPI(formData);
-      return res.data;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(
-        err.response?.data?.message || err.response?.data?.msg
-      );
-    }
-  }
-);
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:5000/api",
 
-export const getProfile = createAsyncThunk(
-  "auth/profile",
-  async (_, thunkAPI) => {
-    try {
-      const res = await getProfileAPI();
-      return res.data;
-    } catch (err) {
-      return thunkAPI.rejectWithValue("Not authorized");
-    }
-  }
-);
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+    
 
-// 🧱 Initial State (FIXED)
+      if (token) {
+        headers.set(
+          "x-auth-token",token
+        );
+      }
 
-const initialState = {
-  user: null,
-  token: localStorage.getItem("token") || null,
-  isAuthenticated: false,
-  loading: false, // 🔥 start as true (important)
-  error: null,
-};
-
-// 🧩 Slice
-
-const authSlice = createSlice({
-  name: "auth",
-  initialState,
-  reducers: {
-    logout: (state) => {
-      state.user = null;
-      state.token = null;
-      state.isAuthenticated = false;
-      state.loading = false;
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      return headers;
     },
   },
   extraReducers: (builder) => {
@@ -86,8 +34,7 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isAuthenticated = true;
 
-        localStorage.setItem('token', action.payload.token);
-        localStorage.setItem('user', JSON.stringify(action.payload));
+        localStorage.setItem("token", action.payload.token);
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
@@ -105,8 +52,7 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isAuthenticated = true;
 
-        localStorage.setItem('token', action.payload.token);
-        localStorage.setItem('user', JSON.stringify(action.payload));
+        localStorage.setItem("token", action.payload.token);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
@@ -121,13 +67,11 @@ const authSlice = createSlice({
         state.user = action.payload;
         state.isAuthenticated = true;
         state.loading = false; // 🔥 critical
-        localStorage.setItem('user', JSON.stringify(action.payload));
       })
       .addCase(getProfile.rejected, (state) => {
         state.user = null;
         state.isAuthenticated = false;
         state.loading = false; // 🔥 critical
-        localStorage.removeItem('user');
       });
   },
 });

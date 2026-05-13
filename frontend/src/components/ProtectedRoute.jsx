@@ -1,15 +1,20 @@
-import { useSelector } from "react-redux";
+
 import { Navigate } from "react-router-dom";
+import { useGetProfileQuery } from "../features/auth/authAPI";
 
-const ProtectedRoute = ({ children,roleRequired }) => {
-  const { isAuthenticated, user,loading } = useSelector((state) => state.auth);
+const ProtectedRoute = ({ children, roleRequired }) => {
+  const token = localStorage.getItem("token");
 
-  // 🔥 WAIT before deciding
-  if (loading) {
+  const { data: user, isLoading, isError } = useGetProfileQuery(undefined, {
+    skip: !token,
+  });
+
+  if (isLoading) {
     return <h2>Loading...</h2>;
   }
 
-  if (!isAuthenticated) {
+  // token invalid or API fails
+  if (isError || !user) {
     return <Navigate to="/login" />;
   }
 

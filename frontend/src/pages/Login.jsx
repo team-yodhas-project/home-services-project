@@ -1,92 +1,138 @@
 import "../styles/auth.css";
 import { useFormik } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useState,useRef, useEffect } from "react";
-
+import { useState, useRef, useEffect } from "react";
+import { useLoginUserMutation } from "../features/auth/authAPI";
+import { useGetProfileQuery } from "../features/auth/authAPI";
 
 function Login() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error } = useSelector((state) => state.auth);
-  useEffect(()=>{
-    ref1.current.focus();
-  }, [])
 
-  const ref1=useRef();
-  const ref2=useRef();
-
-  function handleChange(ev){
-    if(ev.key=="Enter"){
-      ref2.current.focus();
-    }
-  }
   const [showPassword, setShowPassword] = useState(false);
 
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
+  const [loginUser, { isLoading, error }] =
+    useLoginUserMutation();
+
+  useEffect(() => {
+    emailRef.current?.focus();
+  }, []);
+
   const formik = useFormik({
-    initialValues: { email: "", password: "" },
+    initialValues: {
+      email: "",
+      password: "",
+    },
+
     onSubmit: async (values) => {
-      const res = await dispatch(loginUser(values));
+      try {
+        const res = await loginUser(values).unwrap();
 
-      if (res.meta.requestStatus === "fulfilled") {
-        const role = res.payload.role;
 
-        if (role === "customer") navigate("/customerdashboard");
-        else navigate("/workerdashboard");
+        // store token
+        localStorage.setItem("token", res.token);
+        localStorage.setItem("user",res.name);
+
+
+       
+
+        // role-based routing
+        const role = res.role;
+
+        if (role === "customer") {
+          navigate("/customerdashboard");
+        } else if (role === "provider") {
+          navigate("/workerdashboard");
+        } else {
+          navigate("/");
+        }
+
+      } catch (err) {
+        console.error("Login failed:", err);
       }
     },
   });
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      passwordRef.current?.focus();
+    }
+  };
 
   return (
     <div className="auth-wrapper">
       <div className="auth-card">
 
-        <h2 className="auth-title">Welcome Back!</h2>
-        <p className="auth-subtitle">Login to your account</p>
+        <h2 className="auth-title">Welcome Back</h2>
+        <p className="auth-subtitle">Login to continue</p>
 
         <form onSubmit={formik.handleSubmit}>
 
+          {/* EMAIL */}
           <div className="input-group">
             <label>Email</label>
+
             <input
               name="email"
-              onChange={formik.handleChange}
+              type="email"
+              placeholder="Enter email"
               value={formik.values.email}
-              placeholder="Enter your email"
-              ref={ref1}
+              onChange={formik.handleChange}
+              ref={emailRef}
+              onKeyDown={handleKeyDown}
             />
           </div>
 
+          {/* PASSWORD */}
           <div className="input-group password-box">
             <label>Password</label>
+
             <input
-              type={showPassword ? "text" : "password"}
               name="password"
-              onChange={formik.handleChange}
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter password"
               value={formik.values.password}
-              placeholder="Enter your password"
-              ref={ref2}
-              onKeyUp={(ev)=>{handleChange(ev)}}
+              onChange={formik.handleChange}
+              ref={passwordRef}
             />
+
             <span
-              className="password-toggle"
-              onClick={() => setShowPassword(!showPassword)}
+              className="password-toggle-inside"
+              onClick={() => setShowPassword((prev) => !prev)}
             >
               {showPassword ? "Hide" : "Show"}
             </span>
           </div>
 
-          {error && <p className="error">{error}</p>}
+          {/* ERROR */}
+          {error && (
+            <p className="error">
+              {error?.data?.message ||
+                error?.data?.msg ||
+                "Login failed. Please try again."}
+            </p>
+          )}
 
-          <button className="auth-btn" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+          {/* BUTTON */}
+          <button
+            type="submit"
+            className="auth-btn"
+            disabled={isLoading}
+          >
+            {isLoading ? "Logging in..." : "Login"}
           </button>
 
         </form>
 
+        {/* FOOTER */}
         <div className="auth-footer">
-          Don’t have an account? <span onClick={() => navigate("/register")}>Register</span>
+          Don’t have an account?
+
+          <span onClick={() => navigate("/register")}>
+            Register
+          </span>
         </div>
 
       </div>

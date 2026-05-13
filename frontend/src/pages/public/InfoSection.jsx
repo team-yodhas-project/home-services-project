@@ -8,7 +8,7 @@ const InfoSection = () => {
     <section className="info-section">
       <div className="container">
     
-        {/* SECTION HEADER */}
+     
         <div className="info-header">
           <h2>Your Skills. Your Needs. One Platform.</h2>
           <p>
@@ -19,7 +19,7 @@ const InfoSection = () => {
 
         <div className="info-grid">
 
-          {/* PLATFORM VALUE */}
+
           <div className="info-box">
             <h3>Connecting People Seamlessly</h3>
             <p>
@@ -29,7 +29,6 @@ const InfoSection = () => {
             </p>
           </div>
 
-          {/* CUSTOMER */}
           <div className="info-box">
             <h3>For Customers</h3>
             <p className="sub-text">
@@ -48,7 +47,7 @@ const InfoSection = () => {
             </button>
           </div>
 
-          {/* WORKER */}
+      
           <div className="info-box worker-highlight">
             <h3>For Workers</h3>
             <p className="sub-text">

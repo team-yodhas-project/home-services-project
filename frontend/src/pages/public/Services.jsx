@@ -29,7 +29,7 @@ const Services = () => {
       const maxScroll =
         scrollRef.current.scrollWidth / 2;
 
-      // 👇 reset seamlessly
+      //
       if (scrollRef.current.scrollLeft >= maxScroll) {
         scrollRef.current.scrollLeft = 0;
       }

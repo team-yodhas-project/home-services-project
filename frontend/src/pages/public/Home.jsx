@@ -1,7 +1,7 @@
 // components/Hero.jsx
 import React from "react";
 import Navbar from "../../components/Navbar";
-import Services from "../../components/Services";
+import Services from "./Services";
 import InfoSection from "./InfoSection";
 import Footer from "../../components/Footer";
 

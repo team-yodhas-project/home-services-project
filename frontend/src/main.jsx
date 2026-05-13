@@ -4,6 +4,8 @@ import './index.css'
 import App from './App.jsx'
 import {Provider} from 'react-redux'
 import { createBrowserRouter,RouterProvider} from 'react-router-dom'
+import AddService from './pages/WorkerDashboard/AddService.jsx'
+import Bookings from './pages/WorkerDashboard/Bookings.jsx'
 
 import { store } from './app/store.js'
 
@@ -12,9 +14,9 @@ import { store } from './app/store.js'
 import Register from './pages/Register.jsx'
 import Login from './pages/Login.jsx'
 import Home from './pages/public/Home.jsx'
-import Customer_Dashboard from './pages/Customer_Dashboard.jsx'
-import Worker_Dashboard from './pages/Worker_Dashboard.jsx'
-import ServicesPage from './pages/ServicesPage.jsx'
+
+import CustomerLayout from './pages/CustomerDashboard/CustomerLayout.jsx'
+import WorkerLayout from './pages/WorkerDashboard/WorkerLayout.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import RoleRoute from './components/RoleRoute.jsx'
 
@@ -42,7 +44,7 @@ const  router=createBrowserRouter([
           element: (
           <ProtectedRoute roleRequired="customer">
           
-              <Customer_Dashboard />
+              <CustomerLayout/>
           
           </ProtectedRoute>
           ),
@@ -52,10 +54,20 @@ const  router=createBrowserRouter([
           element: (
             <ProtectedRoute roleRequired="provider">
               
-                <Worker_Dashboard />
+                <WorkerLayout />
               
             </ProtectedRoute>
           ),
+          children:[
+          {
+            path: 'addservice',
+            element: <AddService />
+          },
+          {
+            path: 'bookings',
+            element: <Bookings />
+          }
+        ]
         }
       ]
     }

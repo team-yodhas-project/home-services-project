@@ -1,4 +1,4 @@
-.counter {
+/* .counter {
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;
@@ -181,6 +181,7 @@
     right: 0;
     border-right-color: var(--border);
   }
+<<<<<<< HEAD
 }
 
 /* ============ DASHBOARD & BOOKING PAGES ============ */
@@ -469,3 +470,6 @@
     width: 100%;
   }
 }
+=======
+} */
+>>>>>>> 2ce916d5bac4c2fec41d33e480c45944966d8622
