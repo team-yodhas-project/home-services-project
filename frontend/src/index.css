@@ -120,6 +120,56 @@ body {
   display: none;
 }
 
+/* Services section with search */
+.services-section {
+  padding: 40px 0;
+  background: #fafafa;
+}
+
+.services-section .container {
+  max-width: 1200px;
+}
+
+.services-section h2 {
+  font-size: 28px;
+  color: #1f2937;
+  margin-bottom: 15px;
+}
+
+.services-section .service-search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.services-section .service-search input {
+  flex: 1;
+  min-width: 250px;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.services-section .service-search input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.services-section .service-search button {
+  padding: 12px 25px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.services-section .error-message {
+  margin-top: 15px;
+  padding: 12px 15px;
+}
+
 .service-card {
   flex: 0 0 200px;
   background: #fff;

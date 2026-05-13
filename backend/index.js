@@ -22,9 +22,11 @@ connectDB();
 var authRouter=require('./routers/auth.router');
 var serviceRouter=require('./routers/service.router');
 var userRouter=require('./routers/user.router');
+var bookingRouter=require('./routers/booking.router');
 app.use('/api/auth',authRouter);
 app.use('/api/services',serviceRouter);
 app.use('/api/admin',userRouter);
+app.use('/api/bookings',bookingRouter);
 
 
 app.get('/',(req,res)=>{

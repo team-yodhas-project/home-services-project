@@ -14,6 +14,7 @@ import Login from './pages/Login.jsx'
 import Home from './pages/public/Home.jsx'
 import Customer_Dashboard from './pages/Customer_Dashboard.jsx'
 import Worker_Dashboard from './pages/Worker_Dashboard.jsx'
+import ServicesPage from './pages/ServicesPage.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import RoleRoute from './components/RoleRoute.jsx'
 
@@ -32,6 +33,10 @@ const  router=createBrowserRouter([
         },
         { path: '/login',
           element: <Login /> },
+        {
+          path: '/services',
+          element: <ServicesPage />,
+        },
         {
           path: '/customerdashboard',
           element: (
