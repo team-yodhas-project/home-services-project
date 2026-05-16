@@ -1,4 +1,4 @@
-import API from '../../utils/axios';
+
 
 export const createBookingAPI = (payload) => API.post('/bookings', payload);
 export const getCustomerBookingsAPI = () => API.get('/bookings/customer');

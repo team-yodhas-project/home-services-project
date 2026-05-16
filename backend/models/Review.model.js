@@ -17,6 +17,12 @@ const reviewSchema = new mongoose.Schema(
       ref: 'Service',
       required: true,
     },
+    bookingId: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Booking',
+      required: true,
+      unique: true,
+    },
     rating: {
       type: Number,
       required: true,
@@ -27,6 +33,10 @@ const reviewSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    images: {
+      type: [String],
+      default: [],
+    }
   },
   {
     timestamps: true,

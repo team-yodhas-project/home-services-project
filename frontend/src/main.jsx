@@ -19,6 +19,7 @@ import CustomerLayout from './pages/CustomerDashboard/CustomerLayout.jsx'
 import WorkerLayout from './pages/WorkerDashboard/WorkerLayout.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import RoleRoute from './components/RoleRoute.jsx'
+// import ServicesPage from './pages/ServicesPage.jsx'
 
 const  router=createBrowserRouter([
     {
@@ -35,10 +36,10 @@ const  router=createBrowserRouter([
         },
         { path: '/login',
           element: <Login /> },
-        {
-          path: '/services',
-          element: <ServicesPage />,
-        },
+        // {
+        //   path: '/services',
+        //   element: <ServicesPage />,
+        // },
         {
           path: '/customerdashboard',
           element: (

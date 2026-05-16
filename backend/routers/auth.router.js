@@ -3,9 +3,11 @@ var app=express();
 var router=express.Router();
 var User=require('../models/User.model');
 const {auth,isCustomer,isProvider,isAdmin}=require('../middleware/auth.middleware');
-const {registerUser,loginUser,getUserProfile}=require('../controllers/auth.controller');
+const {registerUser,loginUser, getUserProfile, forgotPassword, resetPassword}=require('../controllers/auth.controller');
 var upload=require('../middleware/upload.middleware.js');
 router.post('/register',upload.array('documents', 3),registerUser);
 router.post('/login',loginUser);
-router.get('/profile',auth,getUserProfile)
+router.get('/profile',auth,getUserProfile);
+router.post('/forgot-password',forgotPassword);
+router.post('/reset-password',resetPassword);
 module.exports=router;
