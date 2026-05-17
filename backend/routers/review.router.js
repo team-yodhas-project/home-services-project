@@ -10,6 +10,7 @@ const {
   getProviderReviewSummary,
   getReviewById,
   getReviewAnalytics,
+  getServiceReviews
 } = require('../controllers/review.controller');
 
 router.post('/', [auth, isCustomer, upload.array('images', 5)], createReview);
@@ -19,5 +20,6 @@ router.get('/provider/:providerId/summary', getProviderReviewSummary);
 router.get('/provider/:providerId', getProviderReviews);
 router.get('/getReviewById/:id', auth, getReviewById);
 router.get('/analytics', auth, getReviewAnalytics);
+router.get('/service/:serviceId', getServiceReviews);
 
 module.exports = router;

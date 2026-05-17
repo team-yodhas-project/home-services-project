@@ -1,11 +1,10 @@
-
 import {
   createApi,
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 
-export const bookingApi = createApi({
-  reducerPath: "bookingApi",
+export const reviewApi = createApi({
+  reducerPath: "reviewApi",
 
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000/api",
@@ -21,26 +20,22 @@ export const bookingApi = createApi({
     },
   }),
 
-  tagTypes: ["Bookings"],
+  tagTypes: ["Reviews"],
 
   endpoints: (builder) => ({
 
-    // CREATE BOOKING
-    createBooking: builder.mutation({
+    // GET SERVICE REVIEWS
+    getServiceReviews: builder.query({
 
-      query: (data) => ({
-        url: "/bookings",
-        method: "POST",
-        body: data,
-      }),
+      query: (serviceId) =>
+        `/reviews/service/${serviceId}`,
 
-      invalidatesTags: ["Bookings"],
+      providesTags: ["Reviews"],
     }),
 
   }),
 });
 
 export const {
-  useCreateBookingMutation,
-} = bookingApi;
-
+  useGetServiceReviewsQuery,
+} = reviewApi;

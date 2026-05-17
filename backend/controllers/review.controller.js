@@ -353,6 +353,43 @@ const getReviewAnalytics = async (req, res) => {
   }
 };
 
+const getServiceReviews = async (req, res) => {
+  try {
+    const { serviceId } = req.params;
+    const { page = 1, limit = 10, sortBy } = req.query;
+
+    let query = Review.find({ serviceId })
+      .populate('userId', 'name')
+      .populate('serviceId', 'title category');
+
+    if (sortBy === 'rating') {
+      query = query.sort({ rating: -1, createdAt: -1 });
+    } else {
+      query = query.sort({ createdAt: -1 });
+    }
+
+    const skip = (Number(page) - 1) * Number(limit);
+
+    const reviews = await query
+      .skip(skip)
+      .limit(Number(limit));
+
+    const total = await Review.countDocuments({ serviceId });
+
+    res.json({
+      success: true,
+      total,
+      page: Number(page),
+      limit: Number(limit),
+      reviews,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    });
+  }
+};
 module.exports = {
   createReview,
   editReview,
@@ -361,4 +398,5 @@ module.exports = {
   getProviderReviewSummary,
   getReviewById,
   getReviewAnalytics,
+  getServiceReviews
 };

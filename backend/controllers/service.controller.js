@@ -1,42 +1,78 @@
 var Service=require('../models/service.model.js');
 var geocodeAddress=require('../utils/geocode.js');
 
-const getServices=async(req,res)=>{
-    try{
-        const { category, keyword, address, distance = 50 } = req.query;
-        let query = { isActive: true };
+const getServices = async (req, res) => {
+  try {
+    const { keyword, address, distance = 50 } = req.query;
 
-    if (category) {
-      query.category = category;
-    }
+    let query = { isActive: true };
 
     if (keyword) {
-      query.title = { $regex: keyword, $options: 'i' };
+      query.$or = [
+        { title: { $regex: keyword, $options: "i" } },
+        { category: { $regex: keyword, $options: "i" } },
+      ];
     }
 
-    // Geospatial search
     if (address) {
       const geoData = await geocodeAddress(address);
+
       if (geoData) {
-        const radius = distance / 6378.1; // Convert distance to radians (earth radius ~ 6378.1 km)
+        const radius = distance / 6378.1;
+
         query.location = {
           $geoWithin: {
-            $centerSphere: [geoData.coordinates, radius]
-          }
+            $centerSphere: [geoData.coordinates, radius],
+          },
         };
       }
     }
 
-   const services = await Service.find(query).populate('providerId', 'name profilePic experience');
+    const services = await Service.find(query)
+      .populate("providerId", "name profilePic experience")
+      .sort({ createdAt: -1 });
 
-    // Only return verified provider services
-    const verifiedServices = services.filter(service => service.providerId && service.isActive);
-
-    res.json(verifiedServices);
+    res.json(services);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-}
+};
+// const getServices=async(req,res)=>{
+//     try{
+//         const { category, keyword, address, distance = 50 } = req.query;
+//         let query = { isActive: true };
+
+//     if (category) {
+//       query.category = category;
+//     }
+
+//     if (keyword) {
+//       query.title = { $regex: keyword, $options: 'i' };
+//     }
+
+//     // Geospatial search
+//     if (address) {
+//       const geoData = await geocodeAddress(address);
+//       if (geoData) {
+//         const radius = distance / 6378.1; // Convert distance to radians (earth radius ~ 6378.1 km)
+//         query.location = {
+//           $geoWithin: {
+//             $centerSphere: [geoData.coordinates, radius]
+//           }
+//         };
+//       }
+//     }
+
+//    const services = await Service.find(query).populate('providerId', 'name profilePic experience');
+
+//     // Only return verified provider services
+//     const verifiedServices = services.filter(service => service.providerId && service.isActive);
+
+//     res.json(verifiedServices);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// }
 
 // @desc    Get service by ID
 // @route   GET /api/services/:id

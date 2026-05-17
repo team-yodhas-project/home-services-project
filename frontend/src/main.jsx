@@ -25,6 +25,8 @@ import AdminBookings from './pages/AdminBookings.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import MyServices from './pages/WorkerDashboard/MyServices.jsx';
 import MyBookings from './pages/CustomerDashboard/MyBookings.jsx';
+import Dashboard from './pages/CustomerDashboard/Dashboard.jsx';
+
 
 const  router=createBrowserRouter([
     {
@@ -52,13 +54,17 @@ const  router=createBrowserRouter([
           ),
           children:[
             {
+              index:true,
+              element:<Dashboard/>
+            },
+            {
             path: 'mybookings',
             element: <MyBookings />
             },
             {
             path: 'history',
             element: <History />
-            },
+            }
 
           ]
         },
@@ -70,6 +76,7 @@ const  router=createBrowserRouter([
             </ProtectedRoute>
           ),
           children:[
+
             {
               path: 'addservice',
               element: <AddService />
@@ -112,7 +119,9 @@ const  router=createBrowserRouter([
               path: 'bookings',
               element: <AdminBookings />,
             },
-          ],
+          
+
+        ]
         }
       ]
     }

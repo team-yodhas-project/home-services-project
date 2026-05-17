@@ -1,16 +1,21 @@
 
 import { Navigate } from "react-router-dom";
 import { useGetProfileQuery } from "../features/auth/authAPI";
+import PageLoader from "./PageLoader";
 
 const ProtectedRoute = ({ children, roleRequired }) => {
   const token = localStorage.getItem("token");
 
+  if (!token) {
+  return <Navigate to="/login" replace />;
+  }
+  
   const { data: user, isLoading, isError } = useGetProfileQuery(undefined, {
     skip: !token,
   });
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <PageLoader/>;
   }
 
   // token invalid or API fails

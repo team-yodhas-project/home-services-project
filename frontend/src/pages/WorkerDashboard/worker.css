@@ -2,19 +2,6 @@
   display: flex;
 }
 
-.sidebar {
-  width: 220px;
-  background: #f4f6f8;
-  padding: 20px;
-  height: 100vh;
-  border: 1px solid black;
-}
-
-.sidebar a {
-  display: block;
-  margin: 10px 0;
-  text-decoration: none;
-}
 
 .dashboard-content {
   flex: 1;
@@ -554,4 +541,18 @@
 .form-group select:focus {
   border-color: #2563eb;
   background: white;
+}
+
+.sidebar {
+  width: 220px;
+  background: #f4f6f8;
+  padding: 20px;
+  height: 100vh;
+  border: 1px solid black;
+}
+
+.sidebar a {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
 }

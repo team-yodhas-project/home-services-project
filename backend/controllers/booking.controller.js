@@ -37,7 +37,7 @@ const createBooking = async (req, res) => {
       notes,
     });
 
-
+   
 
     res.status(201).json(booking);
   } catch (error) {
