@@ -1,24 +1,26 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import {Provider} from 'react-redux'
-import { createBrowserRouter,RouterProvider} from 'react-router-dom'
-import AddService from './pages/WorkerDashboard/AddService.jsx'
-import Bookings from './pages/WorkerDashboard/Bookings.jsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import App from './App.jsx';
+import {Provider} from 'react-redux';
+import { createBrowserRouter,RouterProvider} from 'react-router-dom';
+import AddService from './pages/WorkerDashboard/AddService.jsx';
+import Bookings from './pages/WorkerDashboard/Bookings.jsx';
+import History from './pages/CustomerDashboard/History.jsx';
+import { store } from './app/store.js';
 
-import { store } from './app/store.js'
 
 
+import Register from './pages/Register.jsx';
+import Login from './pages/Login.jsx';
+import Home from './pages/public/Home.jsx';
 
-import Register from './pages/Register.jsx'
-import Login from './pages/Login.jsx'
-import Home from './pages/public/Home.jsx'
-
-import CustomerLayout from './pages/CustomerDashboard/CustomerLayout.jsx'
-import WorkerLayout from './pages/WorkerDashboard/WorkerLayout.jsx'
-import ProtectedRoute from './components/ProtectedRoute.jsx'
-import RoleRoute from './components/RoleRoute.jsx'
+import CustomerLayout from './pages/CustomerDashboard/CustomerLayout.jsx';
+import WorkerLayout from './pages/WorkerDashboard/WorkerLayout.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import RoleRoute from './components/RoleRoute.jsx';
+import MyServices from './pages/WorkerDashboard/MyServices.jsx';
+import MyBookings from './pages/CustomerDashboard/MyBookings.jsx';
 
 const  router=createBrowserRouter([
     {
@@ -36,10 +38,6 @@ const  router=createBrowserRouter([
         { path: '/login',
           element: <Login /> },
         {
-          path: '/services',
-          element: <ServicesPage />,
-        },
-        {
           path: '/customerdashboard',
           element: (
           <ProtectedRoute roleRequired="customer">
@@ -48,6 +46,17 @@ const  router=createBrowserRouter([
           
           </ProtectedRoute>
           ),
+          children:[
+            {
+            path: 'mybookings',
+            element: <MyBookings />
+            },
+            {
+            path: 'history',
+            element: <History />
+            },
+
+          ]
         },
         {
           path: '/workerdashboard',
@@ -66,6 +75,10 @@ const  router=createBrowserRouter([
           {
             path: 'bookings',
             element: <Bookings />
+          },
+          {
+            path: 'myservices',
+            element: <MyServices />
           }
         ]
         }

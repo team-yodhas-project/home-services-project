@@ -69,7 +69,7 @@ function Register() {
         const res = await registerUser(payload).unwrap();
 
        localStorage.setItem("token", res.token);
-        localStorage.setItem("user",res.name);
+        localStorage.setItem("user",JSON.stringify(res));
 
 
         navigate(

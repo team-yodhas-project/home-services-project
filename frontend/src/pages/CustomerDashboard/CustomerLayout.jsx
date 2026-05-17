@@ -7,7 +7,7 @@ import BookingPanel from "./BookingPanel";
 import "./customerdashboard.css";
 
 const CustomerLayout = () => {
- const user = localStorage.getItem("user");
+ const user = JSON.parse(localStorage.getItem("user"));
 
 
 
@@ -16,7 +16,7 @@ const CustomerLayout = () => {
       <Sidebar />
 
       <div className="main-content">
-        <Header user={user} />
+        <Header name={user?.name} />
 
         <div className="content-area">
           <ServicesSection />

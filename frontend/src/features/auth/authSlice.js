@@ -1,80 +1,117 @@
+import { createSlice } from "@reduxjs/toolkit";
+import { authApi } from "./authApi";
 
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+const initialState = {
+  user: null,
+  token: localStorage.getItem("token") || null,
+  isAuthenticated: false,
+  loading: false,
+  error: null,
+};
 
-export const authApi = createApi({
-  reducerPath: "authApi",
+const authSlice = createSlice({
+  name: "auth",
+  initialState,
 
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api",
+  reducers: {
+    logout: (state) => {
+      state.user = null;
+      state.token = null;
+      state.isAuthenticated = false;
 
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem("token");
-    
-
-      if (token) {
-        headers.set(
-          "x-auth-token",token
-        );
-      }
-
-      return headers;
+      localStorage.removeItem("token");
     },
   },
+
   extraReducers: (builder) => {
-    builder
 
-      // ================= REGISTER =================
-      .addCase(registerUser.pending, (state) => {
+    // LOGIN
+    builder.addMatcher(
+      authApi.endpoints.loginUser.matchPending,
+      (state) => {
         state.loading = true;
         state.error = null;
-      })
-      .addCase(registerUser.fulfilled, (state, action) => {
+      }
+    );
+
+    builder.addMatcher(
+      authApi.endpoints.loginUser.matchFulfilled,
+      (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+
+        state.user = action.payload.user;
         state.token = action.payload.token;
         state.isAuthenticated = true;
 
         localStorage.setItem("token", action.payload.token);
-      })
-      .addCase(registerUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
+      }
+    );
 
-      // ================= LOGIN =================
-      .addCase(loginUser.pending, (state) => {
+    builder.addMatcher(
+      authApi.endpoints.loginUser.matchRejected,
+      (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      }
+    );
+
+     // REGISTER
+
+     builder.addMatcher(
+      authApi.endpoints.registerUser.matchPending,
+
+      (state) => {
         state.loading = true;
         state.error = null;
-      })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload;
+      }
+    );
+
+    builder.addMatcher(
+      authApi.endpoints.registerUser.matchFulfilled,
+
+      (state, action) => {
+        state.loading=false;
+        state.user = action.payload.user;
         state.token = action.payload.token;
         state.isAuthenticated = true;
 
-        localStorage.setItem("token", action.payload.token);
-      })
-      .addCase(loginUser.rejected, (state, action) => {
+        localStorage.setItem(
+          "token",
+          action.payload.token
+        );
+      }
+    );
+
+    builder.addMatcher(
+      authApi.endpoints.registerUserUser.matchRejected,
+      (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      })
+      }
+    );
 
-      // ================= PROFILE (FIXED PART) =================
-      .addCase(getProfile.pending, (state) => {
-        state.loading = true; // 🔥 this was missing
-      })
-      .addCase(getProfile.fulfilled, (state, action) => {
+
+    // PROFILE
+    builder.addMatcher(
+      authApi.endpoints.getProfile.matchFulfilled,
+      (state, action) => {
         state.user = action.payload;
         state.isAuthenticated = true;
-        state.loading = false; // 🔥 critical
-      })
-      .addCase(getProfile.rejected, (state) => {
+      }
+    );
+
+    builder.addMatcher(
+      authApi.endpoints.getProfile.matchRejected,
+      (state, action) => {
+        state.loading=false;
         state.user = null;
         state.isAuthenticated = false;
-        state.loading = false; // 🔥 critical
-      });
-  },
+        }
+      );
+    },
 });
 
 export const { logout } = authSlice.actions;
+
 export default authSlice.reducer;
+

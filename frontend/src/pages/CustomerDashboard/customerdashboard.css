@@ -3,7 +3,7 @@
   font-family: Arial, sans-serif;
 }
 
-/* Sidebar */
+/* Sidebar
 .sidebar {
   width: 220px;
   background: #f8f9fb;
@@ -29,7 +29,7 @@
 .sidebar .active {
   background: #e3e7ff;
   border-radius: 8px;
-}
+} */
 
 /* Main */
 .main-content {

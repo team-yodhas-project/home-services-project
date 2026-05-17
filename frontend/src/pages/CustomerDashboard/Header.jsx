@@ -1,4 +1,4 @@
-const Header = ({ user }) => {
+const Header = ({ name }) => {
   return (
     <div className="header">
       <div className="search-bar">
@@ -13,7 +13,7 @@ const Header = ({ user }) => {
 
       <div className="user-info">
         🔔
-        <span>{user}</span>
+        <span>{name}</span>
       </div>
     </div>
   );

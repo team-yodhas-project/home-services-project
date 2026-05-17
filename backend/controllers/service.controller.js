@@ -141,6 +141,7 @@ const disableService=async(req,res)=>{
       } 
       service.isActive=false;
       res.json({message:"service Disabled"});
+      await service.save()
     }
     else{
       res.status(404).json({message:'Service not found'});

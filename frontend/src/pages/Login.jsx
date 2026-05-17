@@ -33,7 +33,7 @@ function Login() {
 
         // store token
         localStorage.setItem("token", res.token);
-        localStorage.setItem("user",res.name);
+        localStorage.setItem("user",JSON.stringify(res));
 
 
        

@@ -13,7 +13,6 @@ const ServiceCard = ({ title, image }) => {
     }}>
       <img src={image} alt={title} style={{ marginBottom: "10px" }} />
       <h4>{title}</h4>
-      {/* <button style={{ marginTop: "10px" }} className="btn">Book Now</button> */}
     </div>
   );
 };

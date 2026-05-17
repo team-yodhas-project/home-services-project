@@ -1,5 +1,4 @@
-import { createApi, fetchBaseQuery }
-from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const authApi = createApi({
 
@@ -10,8 +9,7 @@ export const authApi = createApi({
 
     prepareHeaders: (headers) => {
 
-      const token =
-        localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
       if (token) {
         headers.set(
@@ -25,7 +23,7 @@ export const authApi = createApi({
 
   endpoints: (builder) => ({
 
-    // REGISTER
+    
     registerUser: builder.mutation({
 
       query: (data) => ({
@@ -39,15 +37,15 @@ export const authApi = createApi({
     
 
     loginUser: builder.mutation({
-      query: (formData) => ({
+      query: (data) => ({
         url: "/auth/login",
         method: "POST",
-        body: formData,
+        body: data,
       }),
       transformResponse: (response) => response,
     }),
 
-    // PROFILE
+    
     getProfile: builder.query({
 
       query: () => "/auth/profile",
