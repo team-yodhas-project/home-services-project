@@ -14,6 +14,19 @@ const createBooking = async (req, res) => {
       return res.status(404).json({ message: 'Service not found or not currently available.' });
     }
 
+        const existingBooking = await Booking.findOne({
+      customerId: req.user._id,
+      serviceId,
+      bookingDate,
+      timeSlot,
+      status: { $ne: 'cancelled' }
+    });
+
+    if (existingBooking) {
+      return res.status(400).json({
+        message: 'You already booked this service for the selected slot.'
+      });
+    }
     const booking = await Booking.create({
       customerId: req.user._id,
       providerId: service.providerId,
@@ -26,7 +39,7 @@ const createBooking = async (req, res) => {
 
 
 
-    res.status(201).json(populatedBooking);
+    res.status(201).json(booking);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

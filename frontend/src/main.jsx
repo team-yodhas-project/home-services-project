@@ -14,21 +14,17 @@ import { store } from './app/store.js';
 import Register from './pages/Register.jsx';
 import Login from './pages/Login.jsx';
 import Home from './pages/public/Home.jsx';
-
-<<<<<<< HEAD
 import CustomerLayout from './pages/CustomerDashboard/CustomerLayout.jsx';
 import WorkerLayout from './pages/WorkerDashboard/WorkerLayout.jsx';
+import AdminLayout from './pages/AdminLayout.jsx';
+import AdminDashboard from './pages/AdminDashboard.jsx';
+import AdminUsers from './pages/AdminUsers.jsx';
+import AdminProviders from './pages/AdminProviders.jsx';
+import AdminServices from './pages/AdminServices.jsx';
+import AdminBookings from './pages/AdminBookings.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
-import RoleRoute from './components/RoleRoute.jsx';
 import MyServices from './pages/WorkerDashboard/MyServices.jsx';
 import MyBookings from './pages/CustomerDashboard/MyBookings.jsx';
-=======
-import CustomerLayout from './pages/CustomerDashboard/CustomerLayout.jsx'
-import WorkerLayout from './pages/WorkerDashboard/WorkerLayout.jsx'
-import ProtectedRoute from './components/ProtectedRoute.jsx'
-import RoleRoute from './components/RoleRoute.jsx'
-// import ServicesPage from './pages/ServicesPage.jsx'
->>>>>>> 4999102718d01af6eb89677d73dd93a9b3b7739b
 
 const  router=createBrowserRouter([
     {
@@ -45,13 +41,6 @@ const  router=createBrowserRouter([
         },
         { path: '/login',
           element: <Login /> },
-<<<<<<< HEAD
-=======
-        // {
-        //   path: '/services',
-        //   element: <ServicesPage />,
-        // },
->>>>>>> 4999102718d01af6eb89677d73dd93a9b3b7739b
         {
           path: '/customerdashboard',
           element: (
@@ -77,25 +66,53 @@ const  router=createBrowserRouter([
           path: '/workerdashboard',
           element: (
             <ProtectedRoute roleRequired="provider">
-              
-                <WorkerLayout />
-              
+              <WorkerLayout />
             </ProtectedRoute>
           ),
           children:[
-          {
-            path: 'addservice',
-            element: <AddService />
-          },
-          {
-            path: 'bookings',
-            element: <Bookings />
-          },
-          {
-            path: 'myservices',
-            element: <MyServices />
-          }
-        ]
+            {
+              path: 'addservice',
+              element: <AddService />
+            },
+            {
+              path: 'bookings',
+              element: <Bookings />
+            },
+            {
+              path: 'myservices',
+              element: <MyServices />
+            }
+          ]
+        },
+        {
+          path: '/admin',
+          element: (
+            <ProtectedRoute roleRequired="admin">
+              <AdminLayout />
+            </ProtectedRoute>
+          ),
+          children: [
+            {
+              index: true,
+              element: <AdminDashboard />,
+            },
+            {
+              path: 'users',
+              element: <AdminUsers />,
+            },
+            {
+              path: 'providers',
+              element: <AdminProviders />,
+            },
+            {
+              path: 'services',
+              element: <AdminServices />,
+            },
+            {
+              path: 'bookings',
+              element: <AdminBookings />,
+            },
+          ],
         }
       ]
     }

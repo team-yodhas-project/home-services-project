@@ -1,0 +1,237 @@
+.admin-table-wrapper {
+  overflow-x: auto;
+  border-radius: 24px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.06);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 18px 20px;
+  text-align: left;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.admin-table thead {
+  background: #f8fafc;
+  color: #475569;
+}
+
+.admin-table th {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.admin-table tbody tr:nth-child(odd) {
+  background: #ffffff;
+}
+
+.admin-table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.admin-table tbody tr:hover {
+  background: #eef2ff;
+}
+
+.admin-table__status {
+  display: inline-flex;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.admin-table__status--completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.admin-table__status--pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.admin-table__status--cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.admin-table__status--rejected {
+  background: #edd4ff;
+  color: #6d28d9;
+}
+
+.admin-table-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  background: #f8fafc;
+  border-top: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.admin-table-footer__text {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.admin-table-footer__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-table__button {
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  padding: 10px 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.admin-table__button:hover {
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+.admin-table__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-table__empty {
+  padding: 36px 20px;
+  color: #64748b;
+  text-align: center;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.admin-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.admin-page__header-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05);
+}
+
+.admin-page__header-panel--compact {
+  padding-bottom: 18px;
+}
+
+.admin-page__title {
+  margin: 0;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.admin-page__subtitle {
+  margin: 8px 0 0;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.admin-page__controls {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 380px;
+}
+
+.admin-page__search {
+  width: 100%;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 999px;
+  padding: 14px 18px;
+  font-size: 0.95rem;
+  color: #0f172a;
+  background: #f8fafc;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-page__search:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
+}
+
+.admin-table-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  background: #f8fafc;
+  border-top: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.admin-table-footer__text {
+  font-size: 0.92rem;
+  color: #64748b;
+}
+
+.admin-table-footer__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-table__button {
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  padding: 10px 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.admin-table__button:hover {
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+.admin-table__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .admin-table {
+    min-width: 640px;
+  }
+}

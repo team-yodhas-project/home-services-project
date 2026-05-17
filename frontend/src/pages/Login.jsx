@@ -46,7 +46,7 @@ function Login() {
         } else if (role === "provider") {
           navigate("/workerdashboard");
         } else {
-          navigate("/");
+          navigate("/admin");
         }
 
       } catch (err) {

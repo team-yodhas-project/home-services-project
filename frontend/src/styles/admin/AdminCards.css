@@ -1,0 +1,38 @@
+.admin-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.admin-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 60px rgba(15, 23, 42, 0.12);
+}
+
+.admin-card__label {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.admin-card__value {
+  margin: 14px 0 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.admin-card__meta {
+  margin-top: 10px;
+  color: #475569;
+  font-size: 0.95rem;
+}
