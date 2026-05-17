@@ -24,7 +24,9 @@ const createBooking = async (req, res) => {
       notes,
     });
 
-    res.status(201).json(booking);
+
+
+    res.status(201).json(populatedBooking);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -120,7 +122,36 @@ const getBookingById = async (req, res) => {
       return res.status(403).json({ message: 'Access denied to this booking.' });
     }
 
-    res.json(booking);
+          let providerDetails = null;
+
+      if (
+        booking.status === 'on_the_way'
+      ) {
+
+        providerDetails = {
+            _id: booking.providerId._id,
+            name: booking.providerId.name,
+            phone: booking.providerId.phone,
+            email: booking.providerId.email
+        };
+
+      }
+
+      res.json({
+        bookingId: booking._id,
+        status: booking.status,
+        bookingDate: booking.bookingDate,
+        timeSlot: booking.timeSlot,
+        address: booking.address,
+        service: booking.serviceId,
+
+        provider: providerDetails,
+
+        customer: {
+            _id: booking.customerId._id,
+            name: booking.customerId.name
+        }
+      });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -142,7 +173,7 @@ const cancelBooking = async (req, res) => {
     }
 
     // Cannot cancel completed, rejected, or already cancelled bookings
-    if (['completed', 'rejected', 'cancelled'].includes(booking.status)) {
+    if (['completed','on_the_way', 'rejected', 'cancelled'].includes(booking.status)) {
       return res.status(400).json({ message: `Cannot cancel a ${booking.status} booking.` });
     }
 

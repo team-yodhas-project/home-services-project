@@ -14,7 +14,7 @@ const serviceSchema = new mongoose.Schema(
     category: {
       type: String,
       required: [true, 'Please add a category'],
-      enum: ['Cleaning', 'Plumbing', 'Electrical', 'Carpentry', 'Painting', 'Appliance Repair', 'Other'],
+      enum: ['Cleaning', 'Plumbing', 'Electrical', 'Carpentry', 'Painting', 'Appliance Repair','Beauty', 'Other'],
     },
     price: {
       type: Number,
@@ -39,12 +39,15 @@ const serviceSchema = new mongoose.Schema(
     isActive: {
       type: Boolean,
       default: true,
+    },
+    averageRating:{
+      type:Number,
+      default:0
+    },
+    numberOfReviews:{
+      type:Number,
+      default:0
     }
-  //   approvalStatus: {
-  //   type: String,
-  //   enum: ["pending", "approved", "rejected"],
-  //   default: "pending",
-  // },
   },
   {
     timestamps: true,

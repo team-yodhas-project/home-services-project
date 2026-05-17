@@ -36,7 +36,11 @@ const bookingSchema = new mongoose.Schema(
     },
     notes: {
       type: String,
-    }
+    },
+    reviewed: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

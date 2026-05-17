@@ -15,12 +15,20 @@ import Register from './pages/Register.jsx';
 import Login from './pages/Login.jsx';
 import Home from './pages/public/Home.jsx';
 
+<<<<<<< HEAD
 import CustomerLayout from './pages/CustomerDashboard/CustomerLayout.jsx';
 import WorkerLayout from './pages/WorkerDashboard/WorkerLayout.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import RoleRoute from './components/RoleRoute.jsx';
 import MyServices from './pages/WorkerDashboard/MyServices.jsx';
 import MyBookings from './pages/CustomerDashboard/MyBookings.jsx';
+=======
+import CustomerLayout from './pages/CustomerDashboard/CustomerLayout.jsx'
+import WorkerLayout from './pages/WorkerDashboard/WorkerLayout.jsx'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
+import RoleRoute from './components/RoleRoute.jsx'
+// import ServicesPage from './pages/ServicesPage.jsx'
+>>>>>>> 4999102718d01af6eb89677d73dd93a9b3b7739b
 
 const  router=createBrowserRouter([
     {
@@ -37,6 +45,13 @@ const  router=createBrowserRouter([
         },
         { path: '/login',
           element: <Login /> },
+<<<<<<< HEAD
+=======
+        // {
+        //   path: '/services',
+        //   element: <ServicesPage />,
+        // },
+>>>>>>> 4999102718d01af6eb89677d73dd93a9b3b7739b
         {
           path: '/customerdashboard',
           element: (

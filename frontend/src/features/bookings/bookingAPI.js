@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // import API from '../../utils/axios';
+=======
+
+>>>>>>> 4999102718d01af6eb89677d73dd93a9b3b7739b
 
 // export const createBookingAPI = (payload) => API.post('/bookings', payload);
 // export const getCustomerBookingsAPI = () => API.get('/bookings/customer');

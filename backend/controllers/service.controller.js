@@ -27,7 +27,7 @@ const getServices=async(req,res)=>{
       }
     }
 
-   const services = await Service.find(query).populate('providerId', 'name profilePic experience isVerified');
+   const services = await Service.find(query).populate('providerId', 'name profilePic experience');
 
     // Only return verified provider services
     const verifiedServices = services.filter(service => service.providerId && service.isActive);
@@ -43,7 +43,7 @@ const getServices=async(req,res)=>{
 // @access  Public
  const getServiceById = async (req, res) => {
   try {
-    const service = await Service.findById(req.params.id).populate('providerId', 'name profilePic experience isVerified skills');
+    const service = await Service.findById(req.params.id).populate('providerId', 'name profilePic experience skills');
 
     if (service) {
       res.json(service);
@@ -59,9 +59,6 @@ const getServices=async(req,res)=>{
   try {
     const { title, description, category, price } = req.body;
 
-    // if (!req.user.isVerified) {
-    //   return res.status(403).json({ message: 'You must be verified to create a service' });
-    // }
 
     const service = new Service({
       title,

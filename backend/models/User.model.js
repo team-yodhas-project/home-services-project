@@ -46,17 +46,8 @@ const userSchema = new mongoose.Schema(
       type: Number, // Years of experience
     },
     documents:[String],
-  //   isVerified: {
-  //     type: Boolean,
-  //     default: function () {
-  //       return this.role === 'customer' || this.role === 'admin';
-  //     },
-  //   },
-  //   verificationStatus: {
-  //   type: String,
-  //   enum: ["pending", "approved", "rejected"],
-  //   default: "pending",
-  // },
+    resetPasswordToken: String,
+    resetPasswordExpiry: Date,
   },
   {
     timestamps: true,
