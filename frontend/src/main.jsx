@@ -26,6 +26,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import MyServices from './pages/WorkerDashboard/MyServices.jsx';
 import MyBookings from './pages/CustomerDashboard/MyBookings.jsx';
 import Dashboard from './pages/CustomerDashboard/Dashboard.jsx';
+import Requests from './pages/WorkerDashboard/Requests.jsx';
 
 
 const  router=createBrowserRouter([
@@ -76,14 +77,17 @@ const  router=createBrowserRouter([
             </ProtectedRoute>
           ),
           children:[
-
+           {
+              index:true,
+              element:<Bookings/>
+            },
             {
               path: 'addservice',
               element: <AddService />
             },
             {
-              path: 'bookings',
-              element: <Bookings />
+              path: 'requests',
+              element: <Requests />
             },
             {
               path: 'myservices',

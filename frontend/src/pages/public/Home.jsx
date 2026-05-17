@@ -4,8 +4,35 @@ import Navbar from "../../components/Navbar";
 import Services from "./Services";
 import InfoSection from "./InfoSection";
 import Footer from "../../components/Footer";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate=useNavigate();
+  const handleBrowse = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user) {
+    navigate("/login");
+    return;
+  }
+
+  switch (user.role) {
+    case "customer":
+      navigate("/customerdashboard");
+      break;
+
+    case "provider":
+      navigate("/workerdashboard");
+      break;
+
+    case "admin":
+      navigate("/admindashboard");
+      break;
+
+    default:
+      navigate("/");
+  }
+};
   return (
     <>
     <Navbar></Navbar>
@@ -21,9 +48,9 @@ const Home = () => {
 
             <button
               className="btn hero-btn"
-              onClick={() => navigate("/services")}
+              onClick={handleBrowse}
             >
-              Browse Services
+              Get Started
             </button>
           </div>
 

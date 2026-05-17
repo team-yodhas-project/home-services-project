@@ -17,7 +17,6 @@ const Footer = () => {
         <div className="footer-links">
           <h4>Quick Links</h4>
           <p onClick={() => navigate("/")}>Home</p>
-          <p onClick={() => navigate("/services")}>Services</p>
           <p onClick={() => navigate("/login")}>Login</p>
           <p onClick={() => navigate("/register")}>Register</p>
         </div>

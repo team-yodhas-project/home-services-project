@@ -70,7 +70,7 @@ const Services = () => {
             <div
               key={i}
               className="service-card"
-              onClick={() => navigate(`/services/${service.slug}`)}
+            
             >
               <img src={service.image} alt={service.title} />
               <h4>{service.title}</h4>

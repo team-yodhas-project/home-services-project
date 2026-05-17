@@ -20,11 +20,6 @@
   width: 200px;
 }
 
-/* .service-card {
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin-top: 10px;
-} */
 
 
 /* =========================
@@ -543,16 +538,378 @@
   background: white;
 }
 
-.sidebar {
-  width: 220px;
-  background: #f4f6f8;
-  padding: 20px;
+
+
+
+.worker-sidebar {
+  width: 260px;
   height: 100vh;
-  border: 1px solid black;
+
+  background: white;
+  border-right: 1px solid #eef2f7;
+
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  gap: 10px;
 }
 
-.sidebar a {
-  display: block;
-  margin: 10px 0;
+.worker-sidebar a {
+  display: flex;
+  align-items: center;
+
+
+  padding: 12px 14px;
+  border-radius: 12px;
+
   text-decoration: none;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.worker-sidebar a:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.sidebar-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+/* wrapper for main links */
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* bottom section */
+.sidebar-bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid #eef2f7;
+}
+
+/* logout button (intentionally different from links) */
+.logout-btn {
+  padding: 12px 14px;
+  border-radius: 12px;
+
+  background: #fff;
+  border: 1px solid #fee2e2;
+  color: #dc2626;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+  text-align: left;
+
+  transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #fef2f2;
+}
+/* 
+dashboarddddddddddddddddddddddddddddd */
+
+.provider-page {
+  min-height: 100vh;
+  background: #f5f7fb;
+  padding: 40px;
+}
+
+/* HEADER */
+.provider-header {
+  background: white;
+  border: 1px solid #eef2f7;
+  padding: 28px;
+  border-radius: 24px;
+  margin-bottom: 25px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+}
+
+.provider-header h1 {
+  font-size: 30px;
+  color: #111827;
+}
+
+.provider-header p {
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+/* SECTION TITLE */
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 20px 0;
+  color: #374151;
+}
+
+/* EMPTY */
+.empty-box {
+  background: white;
+  padding: 50px;
+  text-align: center;
+  border-radius: 20px;
+  border: 2px dashed #d1d5db;
+  color: #6b7280;
+}
+
+/* LIST */
+.assignment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* CARD */
+.assignment-card {
+  display: flex;
+  justify-content: space-between;
+  background: white;
+  border: 1px solid #eef2f7;
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+  transition: 0.2s ease;
+}
+
+.assignment-card:hover {
+  transform: translateY(-2px);
+}
+
+/* LEFT */
+.assignment-main {
+  flex: 1;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.top-row h2 {
+  font-size: 20px;
+  color: #111827;
+}
+
+/* STATUS */
+.status {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status.accepted {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.status.on_the_way {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+/* INFO GRID */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.info-grid label {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.info-grid p {
+  font-size: 14px;
+  color: #111827;
+}
+
+/* ADDRESS */
+.address-box label {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.address-box p {
+  font-size: 14px;
+  color: #111827;
+}
+
+/* ACTION */
+.assignment-action {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.complete-btn {
+  background: #111827;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.complete-btn:hover {
+  background: #000;
+}
+
+/* requestssssssssssssssssssssssssss */
+
+.requests-page {
+  min-height: 100vh;
+  background: #f5f7fb;
+  padding: 40px;
+}
+
+/* HEADER */
+.requests-header {
+  background: white;
+  border: 1px solid #eef2f7;
+  padding: 26px;
+  border-radius: 22px;
+  margin-bottom: 25px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+.requests-header h1 {
+  font-size: 28px;
+  color: #111827;
+}
+
+.requests-header p {
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+/* EMPTY */
+.empty-state {
+  background: white;
+  padding: 50px;
+  border-radius: 20px;
+  text-align: center;
+  border: 2px dashed #d1d5db;
+  color: #6b7280;
+}
+
+/* GRID */
+.requests-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 1000px) {
+  .requests-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .requests-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* CARD */
+.request-card {
+  background: white;
+  border: 1px solid #eef2f7;
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+  transition: 0.2s;
+}
+
+.request-card:hover {
+  transform: translateY(-2px);
+}
+
+/* TOP */
+.top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.top h2 {
+  font-size: 18px;
+  color: #111827;
+}
+
+/* STATUS */
+.status-pill {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* META */
+.meta {
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+/* ADDRESS */
+.address {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.accept-btn {
+  flex: 1;
+  background: #059669;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.reject-btn {
+  flex: 1;
+  background: white;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 600;
 }
