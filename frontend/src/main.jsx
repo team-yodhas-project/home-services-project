@@ -29,6 +29,9 @@ import Dashboard from './pages/CustomerDashboard/Dashboard.jsx';
 import Requests from './pages/WorkerDashboard/Requests.jsx';
 import ForgotPassword from './pages/ForgotPassword.jsx';
 import ResetPassword from './pages/ResetPassword.jsx';
+import ForgotPasswordOTP from './pages/ForgotPasswordOTP.jsx';
+import VerifyOTP from './pages/VerifyOTP.jsx';
+import ResetPasswordOTP from './pages/ResetPasswordOTP.jsx';
 
 
 const  router=createBrowserRouter([
@@ -53,6 +56,18 @@ const  router=createBrowserRouter([
         {
           path: '/reset-password/:token',
           element: <ResetPassword />
+        },
+        {
+          path: '/forgot-password-otp',
+          element: <ForgotPasswordOTP />
+        },
+        {
+          path: '/verify-otp',
+          element: <VerifyOTP />
+        },
+        {
+          path: '/reset-password-otp',
+          element: <ResetPasswordOTP />
         },
         {
           path: '/customerdashboard',

@@ -47,6 +47,13 @@ const userSchema = new mongoose.Schema(
     },
     resetPasswordToken: String,
     resetPasswordExpiry: Date,
+    // OTP-based password reset fields
+    resetOTP: String,
+    resetOTPExpiry: Date,
+    otpVerified: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

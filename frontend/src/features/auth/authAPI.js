@@ -77,6 +77,31 @@ export const authApi = createApi({
       }),
     }),
 
+    // OTP-BASED PASSWORD RESET
+    sendPasswordResetOTP: builder.mutation({
+      query: (email) => ({
+        url: "/auth/send-password-reset-otp",
+        method: "POST",
+        body: { email },
+      }),
+    }),
+
+    verifyPasswordResetOTP: builder.mutation({
+      query: (data) => ({
+        url: "/auth/verify-password-reset-otp",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    resetPasswordWithOTP: builder.mutation({
+      query: (data) => ({
+        url: "/auth/reset-password-with-otp",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
   }),
 });
 
@@ -86,6 +111,9 @@ export const {
   useGetProfileQuery,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useSendPasswordResetOTPMutation,
+  useVerifyPasswordResetOTPMutation,
+  useResetPasswordWithOTPMutation,
 } = authApi;
 
 
