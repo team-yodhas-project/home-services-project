@@ -18,7 +18,7 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
-
+      localStorage.removeItem("user");
       localStorage.removeItem("token");
     },
   },
@@ -83,7 +83,7 @@ const authSlice = createSlice({
     );
 
     builder.addMatcher(
-      authApi.endpoints.registerUserUser.matchRejected,
+      authApi.endpoints.registerUser.matchRejected,
       (state, action) => {
         state.loading = false;
         state.error = action.payload;

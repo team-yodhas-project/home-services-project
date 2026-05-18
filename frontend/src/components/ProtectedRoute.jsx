@@ -10,9 +10,18 @@ const ProtectedRoute = ({ children, roleRequired }) => {
   return <Navigate to="/login" replace />;
   }
   
-  const { data: user, isLoading, isError } = useGetProfileQuery(undefined, {
-    skip: !token,
-  });
+  // const { data: user, isLoading, isError } = useGetProfileQuery(undefined, {
+  //   skip: !token,
+  // });
+
+  const {
+  data: user,
+  isLoading,
+  isError,
+} = useGetProfileQuery(undefined, {
+  skip: !token,
+  refetchOnMountOrArgChange: true,
+});
 
   if (isLoading) {
     return <PageLoader/>;
@@ -20,6 +29,8 @@ const ProtectedRoute = ({ children, roleRequired }) => {
 
   // token invalid or API fails
   if (isError || !user) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     return <Navigate to="/login" />;
   }
 

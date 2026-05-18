@@ -45,8 +45,12 @@ function Login() {
           navigate("/customerdashboard");
         } else if (role === "provider") {
           navigate("/workerdashboard");
-        } else {
-          navigate("/admin");
+        } 
+        else if (role === "admin") {
+          navigate("/workerdashboard");
+        } 
+        else {
+          console.log("invalid role")
         }
 
       } catch (err) {

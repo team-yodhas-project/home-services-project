@@ -1,16 +1,16 @@
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+// import { useSelector } from "react-redux";
+// import { Navigate } from "react-router-dom";
 
-const RoleRoute = ({ children, role }) => {
-  const { user } = useSelector((state) => state.auth);
+// const RoleRoute = ({ children, role }) => {
+//   const { user } = useSelector((state) => state.auth);
 
-  if (!user) return <Navigate to="/login" />;
+//   if (!user) return <Navigate to="/login" />;
 
-  if (user.role !== role) {
-    return <Navigate to="/" />;
-  }
+//   if (user.role !== role) {
+//     return <Navigate to="/" />;
+//   }
 
-  return children;
-};
+//   return children;
+// };
 
-export default RoleRoute;
+// export default RoleRoute;

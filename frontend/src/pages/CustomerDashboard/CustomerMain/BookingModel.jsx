@@ -52,6 +52,7 @@ const BookingModal = ({ service, onClose }) => {
             <input
               type="date"
               value={bookingDate}
+              min={new Date().toLocaleDateString("en-CA")}
               onChange={(e) => setBookingDate(e.target.value)}
               required
             />

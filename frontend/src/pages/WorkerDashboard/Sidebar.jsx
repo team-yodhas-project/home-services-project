@@ -4,11 +4,18 @@ import "./worker.css";
 const Sidebar = () => {
   const navigate = useNavigate();
 
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("user");
+  //   navigate("/login");
+  // };
+
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
+  dispatch(logout());
+  // dispatch(authApi.util.resetApiState());
+
+  navigate("/login");
+};
 
   return (
     <div className="worker-sidebar">
@@ -26,9 +33,9 @@ const Sidebar = () => {
 
       {/* ACCOUNT ACTIONS */}
       <div className="sidebar-bottom">
-        <Link to="/workerdashboard/change-password">
+        {/* <Link to="/workerdashboard/change-password">
           Change Password
-        </Link>
+        </Link> */}
 
         <button onClick={handleLogout} className="logout-btn">
           Logout

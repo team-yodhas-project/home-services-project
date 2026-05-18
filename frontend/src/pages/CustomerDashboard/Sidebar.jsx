@@ -7,9 +7,10 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("user");
+     dispatch(logout());
+  // dispatch(authApi.util.resetApiState());
     navigate("/login");
   };
 
@@ -55,15 +56,15 @@ const Sidebar = () => {
       {/* ACCOUNT SECTION */}
       <div className="sidebar-bottom">
 
-        <Link
+        {/* <Link
           to="/customerdashboard/change-password"
           className={isActive("/customerdashboard/change-password") ? "active-link" : ""}
         >
           Change Password
-        </Link>
+        </Link> */}
 
         <button onClick={handleLogout} className="logout-btn">
-          Sign Out
+          Log Out
         </button>
 
       </div>

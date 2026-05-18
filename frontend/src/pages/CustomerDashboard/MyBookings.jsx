@@ -24,11 +24,13 @@ const MyBookings = () => {
       const data = await res.json();
 
       // ONLY pending bookings here
-      const pending = data.filter(
-        (b) => b.status === "pending"
+      const pendingandaccepted = data.filter(
+        (b) =>{return  b.status === "pending" || b.status === "accepted" }
       );
 
-      setBookings(pending);
+
+
+      setBookings(pendingandaccepted);
     } catch (err) {
       console.log(err);
     } finally {
@@ -88,13 +90,30 @@ const MyBookings = () => {
               <div className="top-row">
                 <h2>{b.serviceId?.title}</h2>
 
-                <span className="status pending">
-                  Pending
+                <span className={'status ${b.status}'}>
+                  {b.status}
                 </span>
               </div>
 
               <div className="meta">
                 <p><span>Provider:</span> {b.providerId?.name}</p>
+                
+                  {b.status === "accepted" && (
+                      <>
+                        <p>
+                          <span>Phone:</span>{" "}
+                          {b.providerId?.phone || "Not available"}
+                        </p>
+
+                        <p>
+                          <span>Email:</span>{" "}
+                          {b.providerId?.email}
+                        </p>
+                      </>
+                    )}
+
+
+
                 <p><span>Date:</span> {new Date(b.bookingDate).toDateString()}</p>
                 <p><span>Time:</span> {b.timeSlot}</p>
               </div>
