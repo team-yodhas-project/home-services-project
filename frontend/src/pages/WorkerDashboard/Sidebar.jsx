@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./worker.css";
-
+import { useState } from "react";
 const Sidebar = () => {
   const navigate = useNavigate();
-
+  const [openPasswordModal, setOpenPasswordModal] = useState(false);
   // const handleLogout = () => {
   //   localStorage.removeItem("token");
   //   localStorage.removeItem("user");
@@ -33,13 +33,17 @@ const Sidebar = () => {
 
       {/* ACCOUNT ACTIONS */}
       <div className="sidebar-bottom">
-        {/* <Link to="/workerdashboard/change-password">
-          Change Password
-        </Link> */}
 
-        <button onClick={handleLogout} className="logout-btn">
+        {/* <button onClick={() => openPasswordModal(true)}>
+          Change Password
+        </button> */}
+        <Link to="/workerdashboard/change-password">
+          Change Password
+        </Link>
+
+         <button onClick={handleLogout} className="logout-btn">
           Logout
-        </button>
+        </button> 
       </div>
 
     </div>

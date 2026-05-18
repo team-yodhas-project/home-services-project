@@ -29,7 +29,14 @@ import Dashboard from './pages/CustomerDashboard/Dashboard.jsx';
 import Requests from './pages/WorkerDashboard/Requests.jsx';
 import ForgotPassword from './pages/ForgotPassword.jsx';
 import ResetPassword from './pages/ResetPassword.jsx';
+
 import VerifyResetOTP from './pages/VerifyResetOTP.jsx';
+
+import ForgotPasswordOTP from './pages/ForgotPasswordOTP.jsx';
+import VerifyOTP from './pages/VerifyOTP.jsx';
+import ResetPasswordOTP from './pages/ResetPasswordOTP.jsx';
+import ChangePasswordModal from './components/ChangePasswordModal.jsx';
+
 
 
 const  router=createBrowserRouter([
@@ -78,6 +85,10 @@ const  router=createBrowserRouter([
             element: <MyBookings />
             },
             {
+              path: 'change-password',
+              element: <ChangePasswordModal />
+            },
+            {
             path: 'history',
             element: <History />
             }
@@ -103,6 +114,10 @@ const  router=createBrowserRouter([
             {
               path: 'requests',
               element: <Requests />
+            },
+            {
+              path: 'change-password',
+              element: <ChangePasswordModal />
             },
             {
               path: 'myservices',

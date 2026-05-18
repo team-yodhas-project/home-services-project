@@ -19,6 +19,8 @@ const Dashboard = () => {
   const [bookingOpen, setBookingOpen] = useState(false);
   const [reviewsOpen, setReviewsOpen] = useState(false);
 
+  const [openPasswordModal, setOpenPasswordModal] = useState(false);
+  
   const {
     data: services = [],
     isLoading,

@@ -1,8 +1,9 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch=useDispatch();
 
   const isActive = (path) => location.pathname === path;
 
@@ -56,15 +57,19 @@ const Sidebar = () => {
       {/* ACCOUNT SECTION */}
       <div className="sidebar-bottom">
 
-        {/* <Link
+        <Link
           to="/customerdashboard/change-password"
           className={isActive("/customerdashboard/change-password") ? "active-link" : ""}
         >
           Change Password
-        </Link> */}
+        </Link>
+
+        {/* <button onClick={() => openPasswordModal(true)}>
+          Change Password
+        </button> */}
 
         <button onClick={handleLogout} className="logout-btn">
-          Log Out
+          Logout
         </button>
 
       </div>

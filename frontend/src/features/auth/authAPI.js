@@ -54,6 +54,7 @@ export const authApi = createApi({
 
     }),
 
+
     // // FORGOT PASSWORD
     // forgotPassword: builder.mutation({
     //   query: (email) => ({
@@ -62,6 +63,27 @@ export const authApi = createApi({
     //     body: { email },
     //   }),
     // }),
+
+
+    //change password
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: '/users/changepassword/${id}',
+        method: "PATCH", // or POST depending on your route
+        body: data,
+      }),
+    }),
+
+
+    // FORGOT PASSWORD
+    forgotPassword: builder.mutation({
+      query: (email) => ({
+        url: "/auth/forgot-password",
+        method: "POST",
+        body: { email },
+      }),
+    }),
+
 
     // // RESET PASSWORD
     // resetPassword: builder.mutation({
@@ -107,6 +129,7 @@ export const {
   useSendPasswordResetOTPMutation,
   useVerifyPasswordResetOTPMutation,
   useResetPasswordWithOTPMutation,
+  useChangePasswordMutation
 } = authApi;
 
 
