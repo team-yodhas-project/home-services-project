@@ -198,7 +198,7 @@ const AdminDashboard = () => {
                   popularServices.map((service) => (
                     <div key={service.title} className="admin-card" style={{ marginBottom: "16px", background: "#f8fafc" }}>
                       <h4 className="admin-card__value" style={{ fontSize: "1.05rem" }}>{service.serviceTitle}</h4>
-                      <p className="admin-card__meta">Price: ${service.servicePrice ??  0}</p>
+                      <p className="admin-card__meta">Price: {service.servicePrice ??  0}</p>
                       <p className="admin-card__meta">Total bookings: {service.totalBookings ?? service.bookings ?? 0}</p>
                     </div>
                   ))

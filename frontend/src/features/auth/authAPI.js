@@ -59,23 +59,23 @@ export const authApi = createApi({
 
     }),
 
-    // FORGOT PASSWORD
-    forgotPassword: builder.mutation({
-      query: (email) => ({
-        url: "/auth/forgot-password",
-        method: "POST",
-        body: { email },
-      }),
-    }),
+    // // FORGOT PASSWORD
+    // forgotPassword: builder.mutation({
+    //   query: (email) => ({
+    //     url: "/auth/forgot-password",
+    //     method: "POST",
+    //     body: { email },
+    //   }),
+    // }),
 
-    // RESET PASSWORD
-    resetPassword: builder.mutation({
-      query: (data) => ({
-        url: "/auth/reset-password",
-        method: "POST",
-        body: data,
-      }),
-    }),
+    // // RESET PASSWORD
+    // resetPassword: builder.mutation({
+    //   query: (data) => ({
+    //     url: "/auth/reset-password",
+    //     method: "POST",
+    //     body: data,
+    //   }),
+    // }),
 
     // OTP-BASED PASSWORD RESET
     sendPasswordResetOTP: builder.mutation({

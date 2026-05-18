@@ -129,7 +129,7 @@ function Login() {
         <div className="auth-footer">
           <span
             className="auth-link"
-            onClick={() => navigate("/forgot-password-otp")}
+            onClick={() => navigate("/forgot-password")}
           >
             Forgot password?
           </span>
