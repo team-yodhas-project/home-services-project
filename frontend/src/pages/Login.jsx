@@ -2,8 +2,8 @@ import "../styles/auth.css";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { useLoginUserMutation } from "../features/auth/authAPI";
-import { useGetProfileQuery } from "../features/auth/authAPI";
+import { useLoginUserMutation } from "../features/auth/authAPI.js";
+import { useGetProfileQuery } from "../features/auth/authAPI.js";
 
 function Login() {
   const navigate = useNavigate();
@@ -130,13 +130,19 @@ function Login() {
 
         </form>
 
-        {/* FOOTER */}
+        <div className="auth-footer">
+          <span
+            className="auth-link"
+            onClick={() => navigate("/forgot-password-otp")}
+          >
+            Forgot password?
+          </span>
+        </div>
+
         <div className="auth-footer">
           Don’t have an account?
 
-          <span onClick={() => navigate("/register")}>
-            Register
-          </span>
+          <span onClick={() => navigate("/register")}>{" "}Register</span>
         </div>
 
       </div>

@@ -1,7 +1,7 @@
-var User=require('../models/user.model');
-var Service =require('../models/service.model');
-const Booking = require('../models/booking.model');
-const Review = require('../models/review.model');
+var User=require('../models/User.model');
+var Service =require('../models/Service.model');
+const Booking = require('../models/Booking.model');
+const Review = require('../models/Review.model');
 
 
 //to get stats for admin dashboard

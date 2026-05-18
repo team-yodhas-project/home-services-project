@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles/auth.css";
 import { useFormik } from "formik";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useRegisterUserMutation } from "../features/auth/authApi";
+import { useRegisterUserMutation } from "../features/auth/authAPI.js";
 
 function Register() {
   const location = useLocation();

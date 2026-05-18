@@ -1,4 +1,4 @@
-var Service=require('../models/service.model.js');
+var Service=require('../models/Service.model.js');
 var geocodeAddress=require('../utils/geocode.js');
 
 const getServices = async (req, res) => {

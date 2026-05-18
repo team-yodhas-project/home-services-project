@@ -127,6 +127,23 @@
   cursor: pointer;
 }
 
+.auth-link {
+  display: inline-block;
+  color: #2563eb;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.success-message {
+  color: #166534;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
 .password-input-wrapper {
   position: relative;
   
@@ -177,4 +194,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* OTP Input */
+.otp-input {
+  letter-spacing: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+
+.otp-input:focus {
+  border-color: #2563eb;
 }
