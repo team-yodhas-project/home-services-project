@@ -127,6 +127,23 @@
   cursor: pointer;
 }
 
+.auth-link {
+  display: inline-block;
+  color: #2563eb;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.success-message {
+  color: #166534;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
 .password-input-wrapper {
   position: relative;
   

@@ -27,6 +27,8 @@ import MyServices from './pages/WorkerDashboard/MyServices.jsx';
 import MyBookings from './pages/CustomerDashboard/MyBookings.jsx';
 import Dashboard from './pages/CustomerDashboard/Dashboard.jsx';
 import Requests from './pages/WorkerDashboard/Requests.jsx';
+import ForgotPassword from './pages/ForgotPassword.jsx';
+import ResetPassword from './pages/ResetPassword.jsx';
 
 
 const  router=createBrowserRouter([
@@ -44,6 +46,14 @@ const  router=createBrowserRouter([
         },
         { path: '/login',
           element: <Login /> },
+        {
+          path: '/forgot-password',
+          element: <ForgotPassword />
+        },
+        {
+          path: '/reset-password/:token',
+          element: <ResetPassword />
+        },
         {
           path: '/customerdashboard',
           element: (

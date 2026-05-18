@@ -126,13 +126,19 @@ function Login() {
 
         </form>
 
-        {/* FOOTER */}
+        <div className="auth-footer">
+          <span
+            className="auth-link"
+            onClick={() => navigate("/forgot-password")}
+          >
+            Forgot password?
+          </span>
+        </div>
+
         <div className="auth-footer">
           Don’t have an account?
 
-          <span onClick={() => navigate("/register")}>
-            Register
-          </span>
+          <span onClick={() => navigate("/register")}>{" "}Register</span>
         </div>
 
       </div>
