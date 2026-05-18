@@ -45,7 +45,6 @@ const userSchema = new mongoose.Schema(
     experience: {
       type: Number, // Years of experience
     },
-    documents:[String],
     resetPasswordToken: String,
     resetPasswordExpiry: Date,
   },

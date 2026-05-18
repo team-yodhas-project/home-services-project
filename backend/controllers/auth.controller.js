@@ -27,10 +27,7 @@ var registerUser=async(req,res)=>{
         }
     }
 
-    let documentPaths=[];
-    if(role==="provider" && req.files){
-      documentPaths=req.files.map(file=>file.path); 
-    }
+  
    
     const user = await User.create({
       name,
@@ -41,7 +38,6 @@ var registerUser=async(req,res)=>{
       skills: skills || [],
       experience: experience || 0,
       location: locationData,
-      documents: documentPaths,
     });
 
     if (user) {

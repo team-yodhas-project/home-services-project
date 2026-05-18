@@ -5,7 +5,7 @@ var User=require('../models/User.model');
 const {auth,isCustomer,isProvider,isAdmin}=require('../middleware/auth.middleware');
 const {registerUser,loginUser, getUserProfile, forgotPassword, resetPassword}=require('../controllers/auth.controller');
 var upload=require('../middleware/upload.middleware.js');
-router.post('/register',upload.array('documents', 3),registerUser);
+router.post('/register',registerUser);
 router.post('/login',loginUser);
 router.get('/profile',auth,getUserProfile);
 router.post('/forgot-password',forgotPassword);
