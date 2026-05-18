@@ -9,11 +9,37 @@ app.use(express.static(path.join(__dirname, 'public')));
 var dotenv=require('dotenv');
 dotenv.config();
 
+console.log(process.env.FRONTEND_URL);
 const cors=require('cors');
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'https://skill-link-frontend.onrender.com'
+];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-  credentials: true,
+  origin: function (origin, callback) {
+
+    console.log("CORS Origin Received:", origin);
+
+    if (!origin) return callback(null, true);
+
+    const normalizedOrigin = origin.replace(/\/$/, '');
+
+    const isAllowed = allowedOrigins.some(o =>
+      o.replace(/\/$/, '') === normalizedOrigin
+    );
+
+    if (isAllowed) {
+      return callback(null, true);
+    }
+
+    console.log("BLOCKED BY CORS:", origin);
+    return callback(new Error("CORS not allowed"), false);
+  },
+  credentials: true
 }));
+
 app.use(express.json());
 
 const bodyParser=require('body-parser');

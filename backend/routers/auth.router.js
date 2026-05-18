@@ -8,8 +8,9 @@ router.post('/register',upload.array('documents', 3),registerUser);
 router.post('/login',loginUser);
 router.get('/profile',auth,getUserProfile);
 
-router.post('/forgot-password',forgotPassword);
-router.post('/verify-reset-otp',verifyResetOTP);
-router.post('/reset-password',resetPassword);
+router.post('/send-password-reset-otp',forgotPassword);
+router.post('/verify-password-reset-otp',verifyResetOTP);
+router.post('/reset-password-with-otp',resetPassword);
 
+console.log("AUTH ROUTER LOADED");
 module.exports=router;

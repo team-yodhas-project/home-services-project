@@ -1,10 +1,8 @@
 import "../styles/auth.css";
-import axios from "axios";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+import { useResetPasswordWithOTPMutation } from "../features/auth/authAPI";
 
 function ResetPassword() {
   const navigate = useNavigate();
@@ -13,11 +11,16 @@ function ResetPassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+
+  const [resetPassword, { isLoading, error }] = useResetPasswordWithOTPMutation();
 
   useEffect(() => {
     passwordRef.current?.focus();
-  }, []);
+    const email = sessionStorage.getItem("resetEmail");
+    if (!email) {
+      navigate("/forgot-password");
+    }
+  }, [navigate]);
 
   const formik = useFormik({
     initialValues: {
@@ -39,25 +42,23 @@ function ResetPassword() {
       return errors;
     },
     onSubmit: async (values) => {
-      setErrorMessage("");
-      setSuccessMessage("");
-
       try {
-        const res = await axios.post(
-          `${API_URL}/api/auth/reset-password`,
-          {
-            newPassword: values.newPassword,
-            confirmPassword: values.confirmPassword,
-          },
-          { withCredentials: true }
-        );
-
-        setSuccessMessage(res.data.message || "Password reset successfully.");
-        setTimeout(() => navigate("/login"), 1500);
+        const email = sessionStorage.getItem("resetEmail");
+        const res = await resetPassword({
+          email,
+          newPassword: values.newPassword,
+          confirmPassword: values.confirmPassword,
+        }).unwrap();
+        
+        setSuccessMessage(res.message || "Password reset successfully!");
+        sessionStorage.removeItem("resetEmail");
+        
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500);
       } catch (err) {
-        setErrorMessage(
-          err?.response?.data?.message || "Unable to reset password."
-        );
+        console.error(err);
+        setSuccessMessage("");
       }
     },
   });
@@ -67,7 +68,7 @@ function ResetPassword() {
       <div className="auth-card">
         <h2 className="auth-title">Reset Password</h2>
         <p className="auth-subtitle">
-          Set a new password after OTP verification.
+          Set a new password for your account.
         </p>
 
         <form onSubmit={formik.handleSubmit}>
@@ -76,9 +77,10 @@ function ResetPassword() {
             <input
               name="newPassword"
               type={showPassword ? "text" : "password"}
-              placeholder="Enter new password"
+              placeholder="Enter new password (min 6 chars)"
               value={formik.values.newPassword}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               ref={passwordRef}
             />
             <span
@@ -97,9 +99,10 @@ function ResetPassword() {
             <input
               name="confirmPassword"
               type={showConfirm ? "text" : "password"}
-              placeholder="Confirm new password"
+              placeholder="Confirm your new password"
               value={formik.values.confirmPassword}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               ref={confirmPasswordRef}
             />
             <span
@@ -108,22 +111,29 @@ function ResetPassword() {
             >
               {showConfirm ? "Hide" : "Show"}
             </span>
-            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-              <small className="error">{formik.errors.confirmPassword}</small>
-            )}
+            {formik.touched.confirmPassword &&
+              formik.errors.confirmPassword && (
+                <small className="error">{formik.errors.confirmPassword}</small>
+              )}
           </div>
 
-          {errorMessage && <p className="error">{errorMessage}</p>}
-          {successMessage && <p className="success-message">{successMessage}</p>}
+          {error && (
+            <p className="error">
+              {error?.data?.message || "Unable to reset password."}
+            </p>
+          )}
 
-          <button type="submit" className="auth-btn">
-            Reset Password
+          {successMessage && (
+            <p className="success-message">{successMessage}</p>
+          )}
+
+          <button type="submit" className="auth-btn" disabled={isLoading}>
+            {isLoading ? "Saving..." : "Reset Password"}
           </button>
         </form>
 
         <div className="auth-footer">
-          Remembered your password?{' '}
-          <span onClick={() => navigate('/login')}>Login</span>
+          <span onClick={() => navigate("/login")} style={{cursor: 'pointer'}}>Back to Login</span>
         </div>
       </div>
     </div>

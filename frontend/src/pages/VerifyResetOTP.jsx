@@ -1,20 +1,23 @@
 import "../styles/auth.css";
-import axios from "axios";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+import { useVerifyPasswordResetOTPMutation } from "../features/auth/authAPI";
 
 function VerifyResetOTP() {
   const navigate = useNavigate();
   const otpRef = useRef(null);
   const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+
+  const [verifyOTP, { isLoading, error }] = useVerifyPasswordResetOTPMutation();
 
   useEffect(() => {
     otpRef.current?.focus();
-  }, []);
+    const email = sessionStorage.getItem("resetEmail");
+    if (!email) {
+      navigate("/forgot-password");
+    }
+  }, [navigate]);
 
   const formik = useFormik({
     initialValues: {
@@ -30,22 +33,20 @@ function VerifyResetOTP() {
       return errors;
     },
     onSubmit: async (values) => {
-      setErrorMessage("");
-      setSuccessMessage("");
-
       try {
-        const res = await axios.post(
-          `${API_URL}/api/auth/verify-reset-otp`,
-          { otp: values.otp },
-          { withCredentials: true }
-        );
-
-        setSuccessMessage(res.data.message || "OTP verified successfully.");
-        setTimeout(() => navigate("/reset-password"), 1200);
+        const email = sessionStorage.getItem("resetEmail");
+        const res = await verifyOTP({
+          email,
+          otp: values.otp,
+        }).unwrap();
+        setSuccessMessage(res.message || "OTP verified successfully!");
+        
+        setTimeout(() => {
+          navigate("/reset-password");
+        }, 1200);
       } catch (err) {
-        setErrorMessage(
-          err?.response?.data?.message || "Unable to verify OTP."
-        );
+        console.error(err);
+        setSuccessMessage("");
       }
     },
   });
@@ -55,7 +56,7 @@ function VerifyResetOTP() {
       <div className="auth-card">
         <h2 className="auth-title">Verify OTP</h2>
         <p className="auth-subtitle">
-          Enter the 6-digit OTP sent to your email or phone.
+          Enter the 6-digit OTP sent to your email.
         </p>
 
         <form onSubmit={formik.handleSubmit}>
@@ -73,17 +74,25 @@ function VerifyResetOTP() {
               onBlur={formik.handleBlur}
               maxLength="6"
               ref={otpRef}
+              className="otp-input"
             />
             {formik.touched.otp && formik.errors.otp && (
               <small className="error">{formik.errors.otp}</small>
             )}
           </div>
 
-          {errorMessage && <p className="error">{errorMessage}</p>}
-          {successMessage && <p className="success-message">{successMessage}</p>}
+          {error && (
+            <p className="error">
+              {error?.data?.message || "Failed to verify OTP."}
+            </p>
+          )}
 
-          <button type="submit" className="auth-btn">
-            Verify OTP
+          {successMessage && (
+            <p className="success-message">{successMessage}</p>
+          )}
+
+          <button type="submit" className="auth-btn" disabled={isLoading}>
+            {isLoading ? "Verifying..." : "Verify OTP"}
           </button>
         </form>
 

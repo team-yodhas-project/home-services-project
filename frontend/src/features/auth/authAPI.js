@@ -1,17 +1,12 @@
 import { createApi, fetchBaseQuery }
-from "@reduxjs/toolkit/query/react";
+  from "@reduxjs/toolkit/query/react";
 
 export const authApi = createApi({
 
   reducerPath: "authApi",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: (() => {
-      const backendUrl =
-        import.meta.env.VITE_BACKEND_URL ||
-        'https://skill-link-nqyv.onrender.com';
-      return `${backendUrl.replace(/\/$/, '')}/api`;
-    })(),
+    baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api`,
 
     prepareHeaders: (headers) => {
 
@@ -20,7 +15,7 @@ export const authApi = createApi({
 
       if (token) {
         headers.set(
-          "x-auth-token",token
+          "x-auth-token", token
         );
       }
 
@@ -41,7 +36,7 @@ export const authApi = createApi({
 
     }),
 
-    
+
 
     loginUser: builder.mutation({
       query: (formData) => ({
@@ -109,8 +104,6 @@ export const {
   useRegisterUserMutation,
   useLoginUserMutation,
   useGetProfileQuery,
-  useForgotPasswordMutation,
-  useResetPasswordMutation,
   useSendPasswordResetOTPMutation,
   useVerifyPasswordResetOTPMutation,
   useResetPasswordWithOTPMutation,

@@ -45,6 +45,16 @@ const userSchema = new mongoose.Schema(
     experience: {
       type: Number, // Years of experience
     },
+    resetOTP: {
+      type: String,
+    },
+    resetOTPExpiry: {
+      type: Date,
+    },
+    otpVerified: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
