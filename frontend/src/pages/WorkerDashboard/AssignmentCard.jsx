@@ -28,6 +28,11 @@ const AssignmentCard = ({ booking, onComplete }) => {
           </div>
 
           <div>
+            <label>email</label>
+            <p>{booking.customerId?.email || "Not available"}</p>
+          </div>
+
+          <div>
             <label>Date</label>
             <p>
               {new Date(booking.bookingDate).toDateString()}

@@ -7,9 +7,10 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("user");
+     dispatch(logout());
+  // dispatch(authApi.util.resetApiState());
     navigate("/login");
   };
 
@@ -63,7 +64,7 @@ const Sidebar = () => {
         </Link>
 
         <button onClick={handleLogout} className="logout-btn">
-          Sign Out
+          Log Out
         </button>
 
       </div>

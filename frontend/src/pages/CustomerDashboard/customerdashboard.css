@@ -1133,3 +1133,12 @@ select:focus {
   background: #1d4ed8;
   transform: translateY(-1px);
 }
+
+.status.pending {
+  background: orange;
+}
+
+.status.accepted {
+  background: green;
+  color: white;
+}

@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authApi } from "../features/auth/authApi";
 import { adminApi } from "../features/admin/adminAPI";
+import authReducer from "../features/auth/authSlice";
 
 import { reviewApi } from "../features/reviews/reviewAPI";
 
@@ -10,7 +11,7 @@ import { serviceApi } from "../features/services/serviceAPI";
 
 export const store = configureStore({
   reducer: {
-
+ auth: authReducer,
     [authApi.reducerPath]: authApi.reducer,
     [adminApi.reducerPath]: adminApi.reducer,
 
