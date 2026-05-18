@@ -33,9 +33,9 @@ const Sidebar = () => {
 
       {/* ACCOUNT ACTIONS */}
       <div className="sidebar-bottom">
-        <Link to="/workerdashboard/change-password">
+        {/* <Link to="/workerdashboard/change-password">
           Change Password
-        </Link>
+        </Link> */}
 
         <button onClick={handleLogout} className="logout-btn">
           Logout

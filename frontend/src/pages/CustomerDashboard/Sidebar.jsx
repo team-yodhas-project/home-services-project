@@ -56,12 +56,12 @@ const Sidebar = () => {
       {/* ACCOUNT SECTION */}
       <div className="sidebar-bottom">
 
-        <Link
+        {/* <Link
           to="/customerdashboard/change-password"
           className={isActive("/customerdashboard/change-password") ? "active-link" : ""}
         >
           Change Password
-        </Link>
+        </Link> */}
 
         <button onClick={handleLogout} className="logout-btn">
           Log Out
