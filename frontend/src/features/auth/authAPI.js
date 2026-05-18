@@ -9,7 +9,6 @@ export const authApi = createApi({
     baseUrl: (() => {
       const backendUrl =
         import.meta.env.VITE_BACKEND_URL ||
-        window.location.origin ||
         'https://skill-link-nqyv.onrender.com';
       return `${backendUrl.replace(/\/$/, '')}/api`;
     })(),
