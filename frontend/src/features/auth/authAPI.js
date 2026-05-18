@@ -6,7 +6,13 @@ export const authApi = createApi({
   reducerPath: "authApi",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api`,
+    baseUrl: (() => {
+      const backendUrl =
+        import.meta.env.VITE_BACKEND_URL ||
+        window.location.origin ||
+        'https://skill-link-nqyv.onrender.com';
+      return `${backendUrl.replace(/\/$/, '')}/api`;
+    })(),
 
     prepareHeaders: (headers) => {
 
