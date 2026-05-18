@@ -6,7 +6,7 @@ export const authApi = createApi({
   reducerPath: "authApi",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api",
+    baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api`,
 
     prepareHeaders: (headers) => {
 
