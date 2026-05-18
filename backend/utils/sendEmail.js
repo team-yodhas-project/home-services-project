@@ -4,7 +4,7 @@ const sendEmail = async (options) => {
   // Create a transporter with explicit SMTP configuration for better Render compatibility
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 465,
+    port: 587,
     secure: true,
     auth: {
       user: process.env.EMAIL,
